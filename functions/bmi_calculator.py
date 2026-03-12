@@ -1,13 +1,16 @@
+from datetime import datetime
+import pytz
+
 def calculate_bmi(height, weight):
     """
-    Calculate BMI and return a dictionary with the inputs, BMI value, and category.
+    Calculate BMI and return a dictionary with inputs, BMI, category, and timestamp.
 
     Args:
         height (float): Height in meters.
         weight (float): Weight in kilograms.
 
     Returns:
-        dict: A dictionary containing height, weight, bmi, and category.
+        dict: A dictionary containing the inputs, calculated BMI, category, and timestamp.
     """
     if height <= 0 or weight <= 0:
         raise ValueError("Height and weight must be positive values.")
@@ -23,11 +26,10 @@ def calculate_bmi(height, weight):
     else:
         category = 'Adipositas'
 
-    result_dict = {
+    return {
+        "timestamp": datetime.now(pytz.timezone('Europe/Zurich')),  # Current swiss time
         "height": height,
         "weight": weight,
         "bmi": round(bmi, 1),
         "category": category,
-    }
-
-    return result_dict
+    } 
