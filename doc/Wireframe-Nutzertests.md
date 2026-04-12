@@ -1,6 +1,6 @@
-## Wireframe Nutzertest
+# Wireframe Nutzertest
 
-# Hypothese und Bewertung:
+## Hypothese und Bewertung:
 - Die App ist einfach zu benutzen für Personen die kein grosses technisches Wissen haben.
 Teilweise erfüllt 
 - Es kann ein Passing-Bablok-Diagramm ohne grossen Aufwand generiert werden.
@@ -8,7 +8,7 @@ Erfüllt
 - Das Diagramm kann einfach exportiert/gesichert werden.
 Teilweise Erfüllt
 
-# Protokoll:
+## Protokoll:
 Tester öffnet die App
 Der Tester erstellt sich ein Login
 Tester kommt auf die Hauptseite.
@@ -21,7 +21,7 @@ Tester erhält sein PB-Diagramm und den numerischen Wert der Regressionsgerade.
 Ter Tester drückt ‘Download’ – Problem- #Dateityp nicht definiert
 Der Tester Downloadend sein Diagramm und ist Glücklich
 
-# Stichworte zu den 4 Punkten des Test-Rasters:
+## Stichworte zu den 4 Punkten des Test-Rasters:
 - Was war gut?
 Einfach gestaltet für technisch nicht affine Menschen, Roter Faden vorhanden.
 Eine effiziente App die ihre Aufgabe erfüllt, vorausgesetzt, dass die daten korrekt formatiert sind.
