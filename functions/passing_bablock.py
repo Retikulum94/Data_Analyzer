@@ -1,171 +1,106 @@
+# original version written by: https://github.com/Buhin-Mara/Passing-Bablok
+# downloaded 2022-11-03
+# adapted by Cornelia Hofmann, 2022-11 & 2024-11-01
+
 import numpy as np
+import matplotlib.pyplot as plt
+import statistics
 import pandas as pd
-from datetime import datetime
-import pytz
 from scipy import stats
 
+# CSV-Datei einlesen (passen Sie 'your_file.csv' an Ihre Datei an)
+df = pd.read_csv('haemoglobin_geraetevergleich_2Spalten.csv', sep=None, engine='python')
 
-def passing_bablock_regression(method_x, method_y):
-    """
-    Calculate Passing-Bablock regression for comparing two measurement methods.
-    
-    The Passing-Bablock regression is a robust linear regression method that:
-    - Does not require normally distributed data
-    - Is resistant to outliers
-    - Does not assume one method is the reference
-    - Is suitable for method comparison studies
-    
-    Args:
-        method_x (list or array): Measurements from method X
-        method_y (list or array): Measurements from method Y (same length as method_x)
-    
-    Returns:
-        dict: Dictionary containing:
-            - slope: Slope of the regression line
-            - intercept: Y-intercept
-            - slope_ci: 95% confidence interval for slope [lower, upper]
-            - intercept_ci: 95% confidence interval for intercept [lower, upper]
-            - r_squared: Coefficient of determination
-            - r_pearson: Pearson correlation coefficient
-            - residuals: Residuals for each data point
-            - mean_absolute_error: Mean absolute error
-            - rmse: Root mean squared error
-            - n: Number of data points
-            - timestamp: Calculation timestamp
-    """
-    
-    # Convert to numpy arrays
-    x = np.asarray(method_x, dtype=float)
-    y = np.asarray(method_y, dtype=float)
-    
-    # Validation
-    if len(x) != len(y):
-        raise ValueError("method_x and method_y must have the same length")
-    
-    if len(x) < 3:
-        raise ValueError("At least 3 data points are required for Passing-Bablock regression")
-    
-    if np.any(np.isnan(x)) or np.any(np.isnan(y)):
-        raise ValueError("Data contains NaN values")
-    
-    n = len(x)
-    
-    # Calculate differences and sums
-    diff = y - x  # d_i
-    sum_xy = x + y  # s_i
-    
-    # Calculate slope using median method (robust against outliers)
-    # Slope = median((y_i - y_j) / (x_i - x_j)) for all i > j
-    slopes = []
-    for i in range(n):
-        for j in range(i + 1, n):
-            if x[i] != x[j]:
-                slope_ij = (y[i] - y[j]) / (x[i] - x[j])
-                slopes.append(slope_ij)
-    
-    slope = np.median(slopes)
-    
-    # Calculate intercept
-    intercept = np.median(diff - slope * x)
-    
-    # Calculate fitted values
-    y_fitted = slope * x + intercept
-    
-    # Calculate residuals
-    residuals = y - y_fitted
-    
-    # Calculate R-squared
-    ss_res = np.sum(residuals ** 2)
-    ss_tot = np.sum((y - np.mean(y)) ** 2)
-    r_squared = 1 - (ss_res / ss_tot) if ss_tot != 0 else 0
-    
-    # Calculate Pearson correlation
-    r_pearson, p_value = stats.pearsonr(x, y)
-    
-    # Calculate standard error for confidence intervals
-    se_residuals = np.sqrt(ss_res / (n - 2))
-    
-    # Confidence intervals (95%)
-    sxx = np.sum((x - np.mean(x)) ** 2)
-    se_slope = se_residuals / np.sqrt(sxx) * np.sqrt(n / (n - 2))
-    t_critical = stats.t.ppf(0.975, n - 2)  # 95% CI
-    
-    slope_ci = [slope - t_critical * se_slope, slope + t_critical * se_slope]
-    
-    se_intercept = se_residuals * np.sqrt(1/n + np.mean(x)**2 / sxx) * np.sqrt(n / (n - 2))
-    intercept_ci = [intercept - t_critical * se_intercept, intercept + t_critical * se_intercept]
-    
-    # Error metrics
-    mae = np.mean(np.abs(residuals))
-    rmse = np.sqrt(np.mean(residuals ** 2))
-    
-    return {
-        "slope": round(slope, 6),
-        "intercept": round(intercept, 6),
-        "slope_ci": [round(slope_ci[0], 6), round(slope_ci[1], 6)],
-        "intercept_ci": [round(intercept_ci[0], 6), round(intercept_ci[1], 6)],
-        "r_squared": round(r_squared, 6),
-        "r_pearson": round(r_pearson, 6),
-        "p_value": round(p_value, 6),
-        "residuals": [round(r, 6) for r in residuals],
-        "mean_absolute_error": round(mae, 6),
-        "rmse": round(rmse, 6),
-        "n": n,
-        "timestamp": datetime.now(pytz.timezone('Europe/Zurich')),
-    }
+# Alle numerischen Spalten finden
+numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
 
+if len(numeric_cols) == 2:
+    x = np.array(df[numeric_cols[0]])
+    y = np.array(df[numeric_cols[1]])
+    x_label = numeric_cols[0]
+    y_label = numeric_cols[1]
+    print(f"Verwende Spalten: {x_label} und {y_label}")
 
-def compare_methods(method_x_data, method_y_data, method_x_name="Method X", method_y_name="Method Y"):
-    """
-    Compare two measurement methods using Passing-Bablock regression.
-    
-    Args:
-        method_x_data (list or array): Measurements from first method
-        method_y_data (list or array): Measurements from second method
-        method_x_name (str): Name of first method
-        method_y_name (str): Name of second method
-    
-    Returns:
-        dict: Comparison results including regression parameters and statistics
-    """
-    
-    results = passing_bablock_regression(method_x_data, method_y_data)
-    
-    # Add interpretation hints
-    results["method_x_name"] = method_x_name
-    results["method_y_name"] = method_y_name
-    results["equation"] = f"{method_y_name} = {results['slope']} × {method_x_name} + {results['intercept']}"
-    results["agreement"] = "Good" if abs(results['slope'] - 1.0) < 0.1 and abs(results['intercept']) < 0.1 else "Fair"
-    
-    return results
+# Fallback: Benutzer abfragen
+else:
+    print("Verfügbare Spalten:", df.columns.tolist())
+    x_label = input("Geben Sie den Namen der X-Spalte ein: ")
+    y_label = input("Geben Sie den Namen der Y-Spalte ein: ")
+    x = np.array(df[x_label])
+    y = np.array(df[y_label])
 
+N=len(x)
+ 
+# Passing-Bablok Slope Function
+def Passing_Bablok(x,y):
+    ng_count=0
+    PB_list=[]
+ 
+    for i in range(N):
+        for j in range(N):
+            if i < j:
+                slope=(y[i]-y[j])/(x[i]-x[j])
+                PB_list.append(slope)
+                if slope<-1:
+                    ng_count+=1
+            else :
+                pass
+ 
+    shift=ng_count
+    PB_list.sort()
+ 
+    print(shift)
+    del PB_list[:shift]
+ 
+    #Passing-Bablok prep for confidence interval
+    C_alpha=(1-0.95/2)*np.sqrt(N*(N-1)*(2*N+5)/18)
+    N_PB_list=len(PB_list)
+    M1=int(round((N_PB_list-C_alpha)/2))
+    M2=N_PB_list-M1+1
+     
+    #Passing-Bablok slope calculation
+    PB_coef=statistics.median(PB_list)
+    PB_upper=PB_list[M2]
+    PB_lower=PB_list[M1]
+ 
+    return PB_coef,PB_upper,PB_lower
 
-def generate_bland_altman_data(method_x, method_y):
-    """
-    Generate data points for Bland-Altman plot.
+#Passing-Bablock intercept:
+def Passing_BablokIntercept(xlist,ylist,slope):
+    interceptlist = ylist-slope*xlist
+    PB_intercept = statistics.median(interceptlist)
     
-    Args:
-        method_x (list or array): Measurements from method X
-        method_y (list or array): Measurements from method Y
-    
-    Returns:
-        DataFrame: Data with means, differences, and limits of agreement
-    """
-    
-    x = np.asarray(method_x, dtype=float)
-    y = np.asarray(method_y, dtype=float)
-    
-    df = pd.DataFrame({
-        'mean': (x + y) / 2,
-        'difference': y - x,
-    })
-    
-    mean_diff = df['difference'].mean()
-    std_diff = df['difference'].std()
-    
-    df['loa_upper'] = mean_diff + 1.96 * std_diff
-    df['loa_lower'] = mean_diff - 1.96 * std_diff
-    df['mean_diff'] = mean_diff
-    
-    return df
-    
+    return PB_intercept
+ 
+
+# calculating slope with least-square-method
+m, b, r_value, p_value, std_err = stats.linregress(x,y)
+
+#calculate Passing-Bablock method:
+m_PB, m_PB_upper, m_PB_lower=Passing_Bablok(x,y)
+b_PB = Passing_BablokIntercept(x, y, m_PB)
+
+ 
+print(m)
+print(m_PB, m_PB_upper, m_PB_lower)
+ 
+#Plotting the results of the least squares method and the PB method
+plt.scatter(x, y, color="k")
+plt.plot([x.min(), x.max()], [b+m*x.min(), b+m*x.max()],
+         color="b",label="least square")
+plt.plot([x.min(), x.max()], [b+m*x.min(), b+m*x.max()],
+         color="b",label="slope is " + str("{:.3f}".format(m)))
+plt.plot([x.min(), x.max()], [b_PB+m_PB*x.min(), b_PB+m_PB*x.max()],
+         color="r", label="Passing-Bablok")
+plt.plot([x.min(), x.max()], [b_PB+m_PB*x.min(), b_PB+m_PB*x.max()],
+         color="r", label="slope is " + str("{:.3f}".format(m_PB)) 
+         + " (" + str("{:.3f}".format(m_PB_lower)) + ", " 
+         + str("{:.3f}".format(m_PB_upper)) + ")")
+
+# Achsenbeschriftung
+plt.xlabel(x_label)
+plt.ylabel(y_label)
+
+plt.title("Least Square vs Passing-Bablok: linear Regression")
+plt.legend()
+plt.show()
