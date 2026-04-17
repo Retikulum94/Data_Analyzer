@@ -8,7 +8,7 @@ st.markdown("Ein einfaches Tool, um Passing-Bablok Diagramme zu erstellen.")
 
 st.info("""asdf""")
 
-st.write("Diese App wurde von" \
+st.markdown ("Diese App wurde von" \
 "Dennis Bailer (Baileden@students.zhaw.ch)" \
 "- David Brunner (brunndav@students.zhaw.ch)" \
 "- Frochaux Noémie (frochnoe@students.zhaw.ch)" \
