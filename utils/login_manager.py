@@ -117,5 +117,8 @@ class LoginManager:
             try:
                 self._save_auth_credentials()
                 st.success("Credentials saved successfully")
+                self.authenticator = stauth.Authenticate(
+                    self.auth_credentials, self.auth_cookie_name, self.auth_cookie_key
+                )
             except Exception as e:
                 st.error(f"Failed to save credentials: {e}")

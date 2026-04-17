@@ -10,7 +10,7 @@ st.info("""asdf""")
 
 st.write("Diese App wurde von" \
 "Dennis Bailer (Baileden@students.zhaw.ch)" \
-- David Brunner (brunndav@students.zhaw.ch)" \
-- Frochaux Noémie (frochnoe@students.zhaw.ch)" \
-- Vagias Dimitrios (vagiadim@students.zhaw.ch)" \
-im Rahmen des Moduls 'BMLD Informatik 2' an der ZHAW entwickelt.")
+"- David Brunner (brunndav@students.zhaw.ch)" \
+"- Frochaux Noémie (frochnoe@students.zhaw.ch)" \
+"- Vagias Dimitrios (vagiadim@students.zhaw.ch)" \
+"im Rahmen des Moduls 'BMLD Informatik 2' an der ZHAW entwickelt .")
