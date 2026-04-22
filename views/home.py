@@ -1,14 +1,35 @@
 import streamlit as st
 
-# !! WICHTIG: Eure Emails müssen in der App erscheinen!!
+st.markdown("""
+<h1 style='text-align: center; margin-bottom:0;'>
+Passing-Bablok Analyzer
+</h1>
+<h4 style='text-align: center; color: gray; margin-top:0;'>
+Methodenvergleich im Labor
+</h4>
+""", unsafe_allow_html=True)
 
-st.title('Data Analyzer')
+st.markdown("###")
 
-st.markdown("Ein einfaches Tool, um Passing-Bablok Diagramme zu erstellen.")
+st.container()
 
-st.info("""asdf""")
+st.info("Bitte wählen Sie eine Funktion:")
 
-st.markdown ("Diese App wurde von" \
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.button("📊 Neue Analyse", use_container_width=True)
+
+with col2:
+    st.button("📁 Verlauf", use_container_width=True)
+
+with col3:
+    st.button("❓ Hilfe", use_container_width=True)
+
+st.markdown("---")
+st.caption("Einfach. Schnell. Verständlich.")
+
+st.markdown ("Diese App wurde von " \
 "Dennis Bailer (Baileden@students.zhaw.ch)" \
 "- David Brunner (brunndav@students.zhaw.ch)" \
 "- Frochaux Noémie (frochnoe@students.zhaw.ch)" \
