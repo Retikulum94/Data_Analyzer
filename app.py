@@ -25,9 +25,9 @@ if 'data_df' not in st.session_state:
 st.set_page_config(page_title="Data Analyzer", page_icon=":material/monitor_weight:")
 
 pg_home = st.Page("views/home.py", title="Home", icon=":material/home:", default=True)
-pg_calculator = st.Page("views/calculator.py", title="BMI-Rechner", icon=":material/calculate:")
-pg_viz  = st.Page("views/viz.py",  title="BMI Grafik",  icon=":material/show_chart:")
+pg_anleitung = st.Page("views/Benutzeranleitung_1.py", title="Benutzeranleitung", icon=":material/live_help:")
+pg_theorie  = st.Page("views/Theorie.py",  title="Theorie",  icon=":material/psychology_alt:")
 pg_data_analyer = st.Page("views/passing_bablok2.py", title="Passing Bablok generator", icon=":material/calculate:")
 
-pg = st.navigation([pg_home, pg_calculator, pg_viz, pg_data_analyer])
+pg = st.navigation([pg_home, pg_anleitung, pg_theorie, pg_data_analyer])
 pg.run()

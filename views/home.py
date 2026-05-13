@@ -17,8 +17,12 @@ st.info("Bitte wählen Sie eine Funktion:")
 
 col1, col2, col3 = st.columns(3)
 
+#with col1:
+    #st.button("📊 Neue Analyse", use_container_width=True)
+
 with col1:
-    st.button("📊 Neue Analyse", use_container_width=True)
+    if st.button("📊 Neue Analyse", use_container_width=True):
+        st.switch_page("views/passing_bablok2.py")
 
 with col2:
     st.button("📁 Verlauf", use_container_width=True)
@@ -29,9 +33,12 @@ with col3:
 st.markdown("---")
 st.caption("Einfach. Schnell. Verständlich.")
 
-st.markdown ("Diese App wurde von " \
-"Dennis Bailer (Baileden@students.zhaw.ch)" \
-"- David Brunner (brunndav@students.zhaw.ch)" \
-"- Frochaux Noémie (frochnoe@students.zhaw.ch)" \
-"- Vagias Dimitrios (vagiadim@students.zhaw.ch)" \
-"im Rahmen des Moduls 'BMLD Informatik 2' an der ZHAW entwickelt .")
+st.markdown ("""
+Diese App wurde von:
+- Dennis Bailer (baileden@students.zhaw.ch)
+- David Brunner (brunndav@students.zhaw.ch)
+- Frochaux Noémie (frochnoe@students.zhaw.ch)
+- Vagias Dimitrios (vagiadim@students.zhaw.ch)
+             
+im Rahmen des Moduls 'BMLD Informatik 2' an der ZHAW entwickelt.
+""")
