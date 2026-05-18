@@ -28,6 +28,7 @@ pg_home = st.Page("views/home.py", title="Home", icon=":material/home:", default
 pg_anleitung = st.Page("views/Benutzeranleitung_1.py", title="Benutzeranleitung", icon=":material/live_help:")
 pg_theorie  = st.Page("views/Theorie.py",  title="Theorie",  icon=":material/psychology_alt:")
 pg_data_analyer = st.Page("views/passing_bablok2.py", title="Passing Bablok generator", icon=":material/calculate:")
+pg_bland_altman = st.Page("views/bland_altman2.py", title="Bland-Altman generator", icon=":material/scatter_plot:")
 
-pg = st.navigation([pg_home, pg_anleitung, pg_theorie, pg_data_analyer])
+pg = st.navigation([pg_home, pg_anleitung, pg_theorie, pg_data_analyer, pg_bland_altman])
 pg.run()
