@@ -1,5 +1,4 @@
 import streamlit as st
-
 st.set_page_config(page_title="Benutzeranleitung - Passing-Bablok Analyzer", layout="wide")
 
 # Custom CSS für bessere Lesbarkeit
@@ -11,6 +10,7 @@ st.markdown("""
         border-radius: 10px;
         margin-bottom: 20px;
         border-left: 5px solid #1f77b4;
+        color: #000;
     }
     .step-box {
         background-color: #e8f4f8;
@@ -18,6 +18,7 @@ st.markdown("""
         border-radius: 8px;
         margin-bottom: 15px;
         border-left: 4px solid #2ca02c;
+        color: #000;
     }
     .warning-box {
         background-color: #fff3cd;
@@ -25,6 +26,7 @@ st.markdown("""
         border-radius: 8px;
         margin-bottom: 15px;
         border-left: 4px solid #ff9800;
+        color: #000;
     }
     .example-box {
         background-color: #f5f5f5;
@@ -33,6 +35,7 @@ st.markdown("""
         margin-bottom: 15px;
         font-family: monospace;
         overflow-x: auto;
+        color: #000;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -112,14 +115,14 @@ if page == "Übersicht":
 
 # ==================== CSV VORBEREITEN ====================
 elif page == "CSV vorbereiten":
-    st.header("📋 Schritt 1: CSV-Datei korrekt vorbereiten")
+    st.header(" Schritt 1: CSV-Datei korrekt vorbereiten")
     
     st.markdown("""
     Eine korrekt formatierte CSV-Datei ist essentiell für die Analyse. 
     Folge diesen Schritten, um deine Daten richtig zu exportieren.
     """)
     
-    st.subheader("🔄 Von Excel zu CSV")
+    st.subheader(" Von Excel zu CSV")
     
     st.markdown("""
     <div class="step-box">
@@ -134,11 +137,11 @@ elif page == "CSV vorbereiten":
     <h4>Schritt 2: Daten kontrollieren</h4>
     <p>Überprüfe folgende Punkte:</p>
     <ul>
-        <li>✅ Erste Zeile enthält Spaltenüberschriften</li>
-        <li>✅ Mindestens zwei numerische Spalten vorhanden</li>
-        <li>✅ Keine leeren Zeilen oder Spalten am Anfang</li>
-        <li>✅ Keine Texte in Zahlenspalten (außer in der Kopfzeile)</li>
-        <li>✅ Dezimaltrennzeichen ist Punkt (.) statt Komma (,)</li>
+        <li> Erste Zeile enthält Spaltenüberschriften</li>
+        <li> Mindestens zwei numerische Spalten vorhanden</li>
+        <li> Keine leeren Zeilen oder Spalten am Anfang</li>
+        <li> Keine Texte in Zahlenspalten (außer in der Kopfzeile)</li>
+        <li> Dezimaltrennzeichen ist Punkt (.) statt Komma (,)</li>
     </ul>
     </div>
     """, unsafe_allow_html=True)
@@ -274,29 +277,29 @@ elif page == "Datei hochladen":
         st.markdown("""
         **Nach erfolgreichem Upload:**
         
-        1. ✅ Datei wird verarbeitet
-        2. ✅ Alle numerischen Spalten werden erkannt
-        3. ✅ Vorschau wird angezeigt
-        4. ✅ Du kannst Spalten auswählen
+        1.  Datei wird verarbeitet
+        2.  Alle numerischen Spalten werden erkannt
+        3.  Vorschau wird angezeigt
+        4.  Du kannst Spalten auswählen
         """)
     
     with col2:
         st.markdown("""
         **Danach gehts weiter mit:**
         
-        1. 👉 Wähle X-Achse (Referenz)
-        2. 👉 Wähle Y-Achse (Test)
-        3. 👉 Ergebnisse anschauen
-        4. 👉 Statistiken interpretieren
+        1.  Wähle X-Achse (Referenz)
+        2.  Wähle Y-Achse (Test)
+        3.  Ergebnisse anschauen
+        4.  Statistiken interpretieren
         """)
     
     st.markdown("""
     <div class="warning-box">
-    <h4>⚠️ Häufige Upload-Fehler</h4>
+    <h4> Häufige Upload-Fehler</h4>
     </div>
     """, unsafe_allow_html=True)
     
-    with st.expander("❌ Fehler: 'Mindestens 2 numerische Spalten erforderlich'"):
+    with st.expander(" Fehler: 'Mindestens 2 numerische Spalten erforderlich'"):
         st.markdown("""
         **Problem:** Die App findet zu wenige Zahlenspalten.
         
@@ -307,7 +310,7 @@ elif page == "Datei hochladen":
         - Datei neu speichern und erneut hochladen
         """)
     
-    with st.expander("❌ Fehler: 'Fehler beim Einlesen der Datei'"):
+    with st.expander(" Fehler: 'Fehler beim Einlesen der Datei'"):
         st.markdown("""
         **Problem:** Das Dateiformat ist falsch oder beschädigt.
         
@@ -318,7 +321,7 @@ elif page == "Datei hochladen":
         - Probiere einen anderen Dateinamen ohne Sonderzeichen
         """)
     
-    with st.expander("❌ Fehler: 'Nicht genug Datenpunkte nach Entfernung von NaN-Werten'"):
+    with st.expander(" Fehler: 'Nicht genug Datenpunkte nach Entfernung von NaN-Werten'"):
         st.markdown("""
         **Problem:** Die Datei hat zu viele leere Zellen.
         
@@ -331,14 +334,14 @@ elif page == "Datei hochladen":
 
 # ==================== EINSTELLUNGEN ====================
 elif page == "Einstellungen":
-    st.header("⚙️ Schritt 3: Einstellungen und Spaltenauswahl")
+    st.header(" Schritt 3: Einstellungen und Spaltenauswahl")
     
     st.markdown("""
     Nach dem Upload wählst du deine Messwertespalten aus. Hier erklären wir, 
     wie das funktioniert und was die Optionen bedeuten.
     """)
     
-    st.subheader("📊 Spaltenauswahl")
+    st.subheader(" Spaltenauswahl")
     
     st.markdown("""
     <div class="step-box">
@@ -364,13 +367,13 @@ elif page == "Einstellungen":
     </div>
     """, unsafe_allow_html=True)
     
-    st.subheader("⚠️ Wichtig: X und Y müssen unterschiedlich sein")
+    st.subheader(" Wichtig: X und Y müssen unterschiedlich sein")
     
     col1, col2 = st.columns(2)
     
     with col1:
         st.markdown("""
-        #### ✅ Korrekt
+        ####  Korrekt
         - X-Achse: "Gerät A"
         - Y-Achse: "Gerät B"
         
@@ -379,15 +382,15 @@ elif page == "Einstellungen":
     
     with col2:
         st.markdown("""
-        #### ❌ Falsch
+        ####  Falsch
         - X-Achse: "Gerät A"
         - Y-Achse: "Gerät A"
         
         Du wirst eine Warnung sehen:
-        ⚠️ "Wähle zwei unterschiedliche Spalten!"
+         "Wähle zwei unterschiedliche Spalten!"
         """)
     
-    st.subheader("🔧 Automatische Datenbereinigung")
+    st.subheader(" Automatische Datenbereinigung")
     
     st.markdown("""
     Die App führt automatisch folgende Schritte durch:
@@ -399,7 +402,7 @@ elif page == "Einstellungen":
     Du musst dich darum nicht selbst kümmern - alles läuft automatisch ab!
     """)
     
-    st.subheader("📝 Beispiel: Schritt-für-Schritt")
+    st.subheader(" Beispiel: Schritt-für-Schritt")
     
     st.markdown("""
     **Szenario:** Du möchtest ein neues Blutzuckermessgerät validieren.
@@ -420,14 +423,14 @@ elif page == "Einstellungen":
 
 # ==================== ERGEBNISSE INTERPRETIEREN ====================
 elif page == "Ergebnisse interpretieren":
-    st.header("📊 Schritt 4: Ergebnisse verstehen und interpretieren")
+    st.header(" Schritt 4: Ergebnisse verstehen und interpretieren")
     
     st.markdown("""
     Nach der Analyse siehst du Grafiken und Statistiken. 
     Hier erklären wir, was sie bedeuten.
     """)
     
-    st.subheader("📈 Die Vergleichsgrafik")
+    st.subheader(" Die Vergleichsgrafik")
     
     st.markdown("""
     Die Grafik zeigt zwei Regressionsllinien in einem Scatterplot:
@@ -441,7 +444,7 @@ elif page == "Ergebnisse interpretieren":
     - Wenn sie stark abweichen: Passing-Bablok ist robuster (bei Ausreißern)
     """)
     
-    st.subheader("📊 Die wichtigsten Statistiken")
+    st.subheader(" Die wichtigsten Statistiken")
     
     col1, col2 = st.columns(2)
     
@@ -469,7 +472,7 @@ elif page == "Ergebnisse interpretieren":
         - < 0.80 = fragwürdig
         """)
     
-    st.subheader("🔍 Regressionskoeffizienten")
+    st.subheader(" Regressionskoeffizienten")
     
     st.markdown("""
     <div class="guide-section">
@@ -508,29 +511,29 @@ elif page == "Ergebnisse interpretieren":
     </div>
     """, unsafe_allow_html=True)
     
-    st.subheader("✅ Was bedeutet ein gutes Ergebnis?")
+    st.subheader(" Was bedeutet ein gutes Ergebnis?")
     
     col1, col2 = st.columns([1, 1])
     
     with col1:
         st.markdown("""
         **Ausgezeichnet:**
-        - ✅ Korrelation > 0.95
-        - ✅ Slope 0.98 - 1.02
-        - ✅ Intercept sehr nah bei 0
-        - ✅ Beide Linien fast identisch
+        -  Korrelation > 0.95
+        -  Slope 0.98 - 1.02
+        -  Intercept sehr nah bei 0
+        -  Beide Linien fast identisch
         """)
     
     with col2:
         st.markdown("""
         **Prüfwert:**
-        - ⚠️ Korrelation 0.90 - 0.95
-        - ⚠️ Slope 0.95 - 1.05
-        - ⚠️ Linien unterscheiden sich
-        - ⚠️ Ausreißer sichtbar
+        -  Korrelation 0.90 - 0.95
+        -  Slope 0.95 - 1.05
+        -  Linien unterscheiden sich
+        -  Ausreißer sichtbar
         """)
     
-    st.subheader("🔴 Was bedeutet ein schlechtes Ergebnis?")
+    st.subheader(" Was bedeutet ein schlechtes Ergebnis?")
     
     st.markdown("""
     <div class="warning-box">
@@ -544,14 +547,14 @@ elif page == "Ergebnisse interpretieren":
     </div>
     """, unsafe_allow_html=True)
     
-    st.subheader("📋 Beispiel: Interpretation")
+    st.subheader(" Beispiel: Interpretation")
     
-    with st.expander("📊 Szenario: Blutdruckmessgeräte"):
+    with st.expander(" Szenario: Blutdruckmessgeräte"):
         st.markdown("""
         **Daten:** Vergleich eines neuen digitalen mit einem analogen Blutdruckmessgerät
         
         **Ergebnisse:**
-        - Korrelation: 0.97 ✅
+        - Korrelation: 0.97 
         - Least-Squares Slope: 1.02
         - Passing-Bablok Slope: 1.00
         - Intercept: 0.5 mmHg
@@ -560,15 +563,15 @@ elif page == "Ergebnisse interpretieren":
         - Sehr gute Korrelation → Methoden messen das Gleiche
         - Sehr ähnliche Slopes → Beide gut
         - Minimaler Intercept → Kein systematischer Fehler
-        - **Fazit:** Neue Methode validiert! ✅
+        - **Fazit:** Neue Methode validiert! 
         """)
     
-    with st.expander("📊 Szenario: Glucosemessgeräte (Problematisch)"):
+    with st.expander(" Szenario: Glucosemessgeräte (Problematisch)"):
         st.markdown("""
         **Daten:** Vergleich von zwei Glucosemessgeräten
         
         **Ergebnisse:**
-        - Korrelation: 0.82 ⚠️
+        - Korrelation: 0.82 
         - Least-Squares Slope: 1.15
         - Passing-Bablok Slope: 1.08
         - Intercept: 15 mg/dL
@@ -577,12 +580,12 @@ elif page == "Ergebnisse interpretieren":
         - Akzeptable aber nicht ideale Korrelation
         - Unterschiedliche Slopes → Systematischer Fehler
         - Großer Intercept → Neue Methode misst ~15 mg/dL höher
-        - **Fazit:** Geräte stimmen nicht überein, Kalibrierung nötig! ⚠️
+        - **Fazit:** Geräte stimmen nicht überein, Kalibrierung nötig! 
         """)
 
 # ==================== FAQ ====================
 else:  # "Häufig gestellte Fragen"
-    st.header("❓ Häufig gestellte Fragen (FAQ)")
+    st.header(" Häufig gestellte Fragen (FAQ)")
     
     st.subheader("Allgemeine Fragen")
     
@@ -697,11 +700,11 @@ else:  # "Häufig gestellte Fragen"
         **Kontext ist wichtig!**
         
         **0.92 ist:**
-        - ✅ Sehr gut für medizinische Geräte
-        - ✅ Sehr gut für Labormessungen
-        - ✅ Akzeptabel für Screenings
-        - ⚠️ Grenzwert für kritische Messungen
-        - ❌ Nicht ausreichend für hochpräzise Kalibrationen
+        -  Sehr gut für medizinische Geräte
+        -  Sehr gut für Labormessungen
+        -  Akzeptabel für Screenings
+        -  Grenzwert für kritische Messungen
+        -  Nicht ausreichend für hochpräzise Kalibrationen
         
         **Branchenstandards:**
         - Klinische Chemie: > 0.95 erwartet
@@ -748,14 +751,14 @@ else:  # "Häufig gestellte Fragen"
         st.markdown("""
         **Ja, die App benötigt Spaltennamen in der ersten Zeile!**
         
-        ✅ Korrekt:
+         Korrekt:
         ```
         Methode_A,Methode_B
         10.5,10.2
         12.3,12.1
         ```
         
-        ❌ Falsch:
+         Falsch:
         ```
         10.5,10.2
         12.3,12.1
@@ -772,13 +775,13 @@ else:  # "Häufig gestellte Fragen"
         st.markdown("""
         **Ja!** Aber mit Vorsicht:
         
-        ✅ Okay:
+         Okay:
         - Formatierung
         - Berechnungen (z.B. Mittelwerte)
         - Runden (z.B. auf 2 Dezimalstellen)
         - Filterung (nur bestimmte Zeilen)
         
-        ⚠️ Problematisch:
+         Problematisch:
         - Abhängige Zellen (können "#REF" zeigen beim Export)
         - Externe Verknüpfungen
         - Bedingte Formatierung
@@ -791,7 +794,7 @@ else:  # "Häufig gestellte Fragen"
     
     st.markdown("""
     <div class="guide-section">
-    <h3>💡 Noch Fragen?</h3>
+    <h3> Noch Fragen?</h3>
     <p>Wenn du auf ein Problem stößt:</p>
     <ol>
         <li>Schaue in dieser Anleitung nach (nutze die Suche)</li>
@@ -806,7 +809,7 @@ else:  # "Häufig gestellte Fragen"
 st.markdown("---")
 st.markdown("""
 <div style='text-align: center; color: #666; margin-top: 30px;'>
-<p><small>📖 Benutzeranleitung für Passing-Bablok Analyzer | Version 1.0</small></p>
+<p><small> Benutzeranleitung für Passing-Bablok Analyzer | Version 1.0</small></p>
 <p><small>Zuletzt aktualisiert: 2024</small></p>
 </div>
 """, unsafe_allow_html=True)

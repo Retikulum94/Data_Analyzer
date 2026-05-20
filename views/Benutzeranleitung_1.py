@@ -11,6 +11,7 @@ st.markdown("""
         border-radius: 10px;
         margin-bottom: 20px;
         border-left: 5px solid #1f77b4;
+        color: #000;
     }
     .step-box {
         background-color: #e8f4f8;
@@ -18,6 +19,7 @@ st.markdown("""
         border-radius: 8px;
         margin-bottom: 15px;
         border-left: 4px solid #2ca02c;
+        color: #000;
     }
     .warning-box {
         background-color: #fff3cd;
@@ -25,6 +27,7 @@ st.markdown("""
         border-radius: 8px;
         margin-bottom: 15px;
         border-left: 4px solid #ff9800;
+        color: #000;
     }
     .example-box {
         background-color: #f5f5f5;
@@ -33,6 +36,7 @@ st.markdown("""
         margin-bottom: 15px;
         font-family: monospace;
         overflow-x: auto;
+        color: #000;
     }
     </style>
 """, unsafe_allow_html=True)
