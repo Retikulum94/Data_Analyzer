@@ -38,11 +38,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Titel
-st.title("📚 Benutzeranleitung: Passing-Bablok Analyzer")
+st.title(" Benutzeranleitung: Passing-Bablok Analyzer")
 st.markdown("---")
 
 # Inhaltsverzeichnis
-st.sidebar.title("📑 Inhaltsverzeichnis")
+st.sidebar.title(" Inhaltsverzeichnis")
 page = st.sidebar.radio("Wähle einen Bereich:", [
     "Übersicht",
     "CSV vorbereiten",
@@ -54,7 +54,7 @@ page = st.sidebar.radio("Wähle einen Bereich:", [
 
 # ==================== ÜBERSICHT ====================
 if page == "Übersicht":
-    st.header("🎯 Was ist der Passing-Bablok Analyzer?")
+    st.header(" Was ist der Passing-Bablok Analyzer?")
     
     col1, col2 = st.columns([1, 1])
     
@@ -63,7 +63,7 @@ if page == "Übersicht":
         Der **Passing-Bablok Analyzer** ist ein statistisches Werkzeug, das zwei verschiedene 
         Methoden zur linearen Regressionsanalyse vergleicht:
         
-        ### 📊 Die zwei Methoden
+        ###  Die zwei Methoden
         
         **1. Least-Squares Methode**
         - Klassische lineare Regression
@@ -79,7 +79,7 @@ if page == "Übersicht":
     
     with col2:
         st.markdown("""
-        ### 🎓 Anwendungsbeispiele
+        ###  Anwendungsbeispiele
         
         - Vergleich von zwei Messinstrumenten
         - Validierung neuer Messmethoden
@@ -87,7 +87,7 @@ if page == "Übersicht":
         - Qualitätskontrolle
         - Kalibrationsvergleiche
         
-        ### 📈 Was erhalte ich?
+        ###  Was erhalte ich?
         
         - Vergleich beider Regressionsmethoden
         - Steigungskoeffizient (Slope)
@@ -100,7 +100,7 @@ if page == "Übersicht":
     st.markdown("---")
     st.markdown("""
     <div class="guide-section">
-    <h3>✨ Kurzzusammenfassung der Schritte</h3>
+    <h3> Kurzzusammenfassung der Schritte</h3>
     <ol>
         <li><strong>CSV vorbereiten:</strong> Datei aus Excel exportieren</li>
         <li><strong>Datei hochladen:</strong> CSV in die App laden</li>
@@ -157,12 +157,12 @@ elif page == "CSV vorbereiten":
     </div>
     """, unsafe_allow_html=True)
     
-    st.subheader("📊 Datenformat-Anforderungen")
+    st.subheader(" Datenformat-Anforderungen")
     
     col1, col2 = st.columns([1, 1])
     
     with col1:
-        st.markdown("#### ✅ Korrektes Format")
+        st.markdown("####  Korrektes Format")
         st.markdown("""
         ```
         Referenz,Test
@@ -175,7 +175,7 @@ elif page == "CSV vorbereiten":
         """)
     
     with col2:
-        st.markdown("#### ❌ Fehler vermeiden")
+        st.markdown("####  Fehler vermeiden")
         st.markdown("""
         ```
         Referenz, Test
@@ -190,7 +190,7 @@ elif page == "CSV vorbereiten":
     
     st.markdown("""
     <div class="warning-box">
-    <h4>⚠️ Häufige Fehler</h4>
+    <h4> Häufige Fehler</h4>
     <ul>
         <li><strong>Dezimaltrennzeichen:</strong> Verwende einen Punkt (.) statt Komma (,)</li>
         <li><strong>Leerzeichen:</strong> Keine Leerzeichen nach Spaltennamen</li>
@@ -200,9 +200,9 @@ elif page == "CSV vorbereiten":
     </div>
     """, unsafe_allow_html=True)
     
-    st.subheader("🔍 Beispiel: Schritt-für-Schritt")
+    st.subheader(" Beispiel: Schritt-für-Schritt")
     
-    with st.expander("📸 Detailliertes Beispiel mit Screenshots-Text"):
+    with st.expander(" Detailliertes Beispiel mit Screenshots-Text"):
         st.markdown("""
         **Ausgangssituation:** Du hast eine Excel-Datei mit Messwerten von zwei Geräten.
         
@@ -224,18 +224,18 @@ elif page == "CSV vorbereiten":
 
 # ==================== DATEI HOCHLADEN ====================
 elif page == "Datei hochladen":
-    st.header("📤 Schritt 2: CSV-Datei hochladen")
+    st.header(" Schritt 2: CSV-Datei hochladen")
     
     st.markdown("""
     Hier erfährst du, wie du deine vorbereitete CSV-Datei in den Analyzer hochlädst.
     """)
     
-    st.subheader("🚀 Upload-Anleitung")
+    st.subheader(" Upload-Anleitung")
     
     st.markdown("""
     <div class="step-box">
     <h4>Schritt 1: Zur Analyzer-Seite gehen</h4>
-    <p>Navigiere zur Seite "📊 Analyzer" in der linken Menüleiste.</p>
+    <p>Navigiere zur Seite " Analyzer" in der linken Menüleiste.</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -248,7 +248,7 @@ elif page == "Datei hochladen":
         <li>Klicke auf die Upload-Box oder auf "Browse files"</li>
         <li>Wähle deine vorbereitete CSV-Datei</li>
         <li>Warte, bis die Datei verarbeitet wurde</li>
-        <li>Du siehst eine grüne Meldung "✅ Datei geladen! (X Zeilen)"</li>
+        <li>Du siehst eine grüne Meldung " Datei geladen! (X Zeilen)"</li>
     </ol>
     </div>
     """, unsafe_allow_html=True)
@@ -259,14 +259,14 @@ elif page == "Datei hochladen":
     <p>Nach dem Upload wird automatisch eine Vorschau der ersten 10 Zeilen angezeigt.
     Überprüfe hier, ob die Daten korrekt geladen wurden:</p>
     <ul>
-        <li>✅ Spaltenüberschriften sind korrekt</li>
-        <li>✅ Zahlenwerte sind numerisch und nicht als Text</li>
-        <li>✅ Die Anzahl der Zeilen ist korrekt</li>
+        <li> Spaltenüberschriften sind korrekt</li>
+        <li> Zahlenwerte sind numerisch und nicht als Text</li>
+        <li> Die Anzahl der Zeilen ist korrekt</li>
     </ul>
     </div>
     """, unsafe_allow_html=True)
     
-    st.subheader("✅ Upload erfolgreich - Was kommt danach?")
+    st.subheader(" Upload erfolgreich - Was kommt danach?")
     
     col1, col2 = st.columns(2)
     
