@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from functions.bland_altman import create_bland_altman_plot, bland_altman_analysis, calculate_bias_percentage
+from utils.data_manager import DataManager
 st.markdown("""
 
 <h1 style='text-align: center; margin-bottom: 0; font-size: 3.5rem;'>
