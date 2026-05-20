@@ -18,7 +18,6 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 st.info("Laden Sie eine CSV-Datei mit Ihren Messwerten hoch. Die Analyse wird automatisch durchgeführt.")
 st.markdown("<br>", unsafe_allow_html=True)
-# CSV Upload
 
 uploaded_file = st.file_uploader(
     "CSV-Datei hochladen",
@@ -26,21 +25,17 @@ uploaded_file = st.file_uploader(
 )
 
 if uploaded_file is not None:
-    # Read CSV
     try:
         df = pd.read_csv(uploaded_file, sep=None, engine='python')
         st.success(f"Datei erfolgreich geladen ({len(df)} Zeilen).")        
-        # Display preview
         with st.expander("📋 Vorschau der Daten"):
             st.dataframe(df.head(10))
         
-        # Find numeric columns
         numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
         
         if len(numeric_cols) < 2:
             st.error(f"❌ Mindestens 2 numerische Spalten erforderlich. Gefunden: {len(numeric_cols)}")
         else:
-            # Column selection
             col1, col2 = st.columns(2)
             with col1:
                 x_label = st.selectbox("X-Achse (Referenz):", numeric_cols)
@@ -53,7 +48,6 @@ if uploaded_file is not None:
                 x = np.array(df[x_label], dtype=float)
                 y = np.array(df[y_label], dtype=float)
                 
-                # Remove NaN values
                 mask = ~(np.isnan(x) | np.isnan(y))
                 x = x[mask]
                 y = y[mask]
@@ -61,7 +55,6 @@ if uploaded_file is not None:
                 if len(x) < 2:
                     st.error("❌ Nicht genug Datenpunkte nach Entfernung von NaN-Werten")
                 else:
-                    # Create and display plot
                     st.subheader("📈 Vergleich der Regressionsmethoden")
                     fig = create_comparison_plot(x, y, x_label, y_label)
                     st.pyplot(fig)
@@ -75,7 +68,6 @@ if uploaded_file is not None:
                             dm.save_plot(fig, filename)
                             st.success(f"✅ Plot gespeichert: {filename}")
                     
-                    # Display statistics
                     st.subheader("📊 Statistiken")
                     col1, col2 = st.columns(2)
 

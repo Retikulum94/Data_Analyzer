@@ -32,8 +32,6 @@ div.stButton > button {
 """, unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3)
 
-#with col1:
-    #st.button("📊 Neue Analyse", use_container_width=True)
 
 with col1:
     if st.button("📊 Neue Analyse", use_container_width=True):

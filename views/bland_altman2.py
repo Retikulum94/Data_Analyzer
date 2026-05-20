@@ -19,29 +19,24 @@ st.info("Laden Sie eine CSV-Datei mit Ihren Messwerten hoch. Die Analyse wird au
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# CSV Upload
 uploaded_file = st.file_uploader(
     "CSV-Datei hochladen",
     type="csv",
     key="bland_altman_upload"
 )
 if uploaded_file is not None:
-    # Read CSV
     try:
         df = pd.read_csv(uploaded_file, sep=None, engine='python')
         st.success(f"Datei erfolgreich geladen! ({len(df)} Zeilen)")
         
-        # Display preview
         with st.expander("📋 Vorschau der Daten"):
             st.dataframe(df.head(10))
         
-        # Find numeric columns
         numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
         
         if len(numeric_cols) < 2:
             st.error(f"❌ Mindestens 2 numerische Spalten erforderlich. Gefunden: {len(numeric_cols)}")
         else:
-            # Column selection
             col1, col2 = st.columns(2)
             with col1:
                 x_label = st.selectbox("Referenzmessung (X-Achse):", numeric_cols)
@@ -54,7 +49,6 @@ if uploaded_file is not None:
                 x = np.array(df[x_label], dtype=float)
                 y = np.array(df[y_label], dtype=float)
                 
-                # Remove NaN values
                 mask = ~(np.isnan(x) | np.isnan(y))
                 x = x[mask]
                 y = y[mask]
@@ -62,7 +56,6 @@ if uploaded_file is not None:
                 if len(x) < 2:
                     st.error("❌ Nicht genug Datenpunkte nach Entfernung von NaN-Werten")
                 else:
-                    # Create and display plot
                     st.subheader("📈 Bland-Altman Plot")
                     fig, analysis = create_bland_altman_plot(x, y, x_label, y_label)
                     st.pyplot(fig)
@@ -76,7 +69,6 @@ if uploaded_file is not None:
                             dm.save_plot(fig, filename)
                             st.success(f"✅ Plot gespeichert: {filename}")
                     
-                    # Display statistics in columns
                     st.subheader("📊 Statistiken")
                     
                     col1, col2, col3 = st.columns(3)
@@ -96,11 +88,9 @@ if uploaded_file is not None:
                         agreement_range = analysis['agreement_range']
                         st.metric("Übereinstimmungsbereich", f"{agreement_range:.4f}")
                     
-                    # Bias percentage
                     bias_pct = calculate_bias_percentage(x, y)
                     st.metric("Bias (%)", f"{bias_pct:.2f}%")
                     
-                    # Interpretation
                     st.subheader("💡 Interpretation")
                     st.info(f"""
                     **Mittlere Differenz:** {analysis['mean_diff']:.4f}  

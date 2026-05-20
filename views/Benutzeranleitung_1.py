@@ -1,6 +1,5 @@
 import streamlit as st
 
-# Custom CSS für bessere Lesbarkeit
 st.markdown("""
     <style>
     .guide-section {
@@ -39,7 +38,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Titel
+
 st.markdown("""
 
 <h1 style='text-align: center; margin-bottom: 0; font-size: 3.5rem;'>
@@ -57,7 +56,7 @@ Passing-Bablok Analyzer
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# Inhaltsverzeichnis
+
 st.sidebar.title(" Inhaltsverzeichnis")
 page = st.sidebar.radio("Wähle einen Bereich:", [
     "Übersicht",
@@ -68,7 +67,7 @@ page = st.sidebar.radio("Wähle einen Bereich:", [
     "Häufig gestellte Fragen"
 ])
 
-# ==================== ÜBERSICHT ====================
+
 if page == "Übersicht":
     st.header(" Was ist der Passing-Bablok Analyzer?")
     
@@ -126,7 +125,6 @@ if page == "Übersicht":
     </div>
     """, unsafe_allow_html=True)
 
-# ==================== CSV VORBEREITEN ====================
 elif page == "CSV vorbereiten":
     st.header(" Schritt 1: CSV-Datei korrekt vorbereiten")
     
@@ -238,7 +236,6 @@ elif page == "CSV vorbereiten":
         **Fertig!** Die CSV-Datei ist jetzt bereit zum Hochladen.
         """)
 
-# ==================== DATEI HOCHLADEN ====================
 elif page == "Datei hochladen":
     st.header(" Schritt 2: CSV-Datei hochladen")
     
@@ -345,7 +342,6 @@ elif page == "Datei hochladen":
         - Du brauchst mindestens 2 gültige Datenpunkte
         """)
 
-# ==================== EINSTELLUNGEN ====================
 elif page == "Einstellungen":
     st.header(" Schritt 3: Einstellungen und Spaltenauswahl")
     
@@ -434,7 +430,6 @@ elif page == "Einstellungen":
     **Ergebnis:** Der Analyzer vergleicht automatisch beide Methoden!
     """)
 
-# ==================== ERGEBNISSE INTERPRETIEREN ====================
 elif page == "Ergebnisse interpretieren":
     st.header(" Schritt 4: Ergebnisse verstehen und interpretieren")
     
@@ -596,8 +591,7 @@ elif page == "Ergebnisse interpretieren":
         - **Fazit:** Geräte stimmen nicht überein, Kalibrierung nötig! 
         """)
 
-# ==================== FAQ ====================
-else:  # "Häufig gestellte Fragen"
+else:
     st.header(" Häufig gestellte Fragen (FAQ)")
     
     st.subheader("Allgemeine Fragen")
@@ -818,7 +812,6 @@ else:  # "Häufig gestellte Fragen"
     </div>
     """, unsafe_allow_html=True)
 
-# ==================== FOOTER ====================
 st.markdown("---")
 
 st.caption("Benutzeranleitung für den Passing-Bablok Analyzer")
