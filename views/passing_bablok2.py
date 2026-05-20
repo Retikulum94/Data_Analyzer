@@ -4,20 +4,32 @@ import numpy as np
 from functions.passing_bablok import create_comparison_plot
 from utils.data_manager import DataManager
 
-st.set_page_config(page_title="Passing-Bablok Analyzer", layout="wide")
+st.markdown("""
 
-st.title("📊 Passing-Bablok Analyzer")
-st.markdown("Vergleich von Least-Square und Passing-Bablok Methoden für lineare Regression")
+<h1 style='text-align: center; margin-bottom: 0; font-size: 3.5rem;'>           
+Passing-Bablok Analyse 📊 
+</h1>
+<h3 style='text-align: center; color: #6c757d; margin-top: 0;'>
+Vergleich zweier Messmethoden
+</h3>
+""", unsafe_allow_html=True)
 
+st.markdown("<br>", unsafe_allow_html=True)
+
+st.info("Laden Sie eine CSV-Datei mit Ihren Messwerten hoch. Die Analyse wird automatisch durchgeführt.")
+st.markdown("<br>", unsafe_allow_html=True)
 # CSV Upload
-uploaded_file = st.file_uploader("CSV-Datei hochladen", type="csv")
+
+uploaded_file = st.file_uploader(
+    "CSV-Datei hochladen",
+    type="csv"
+)
 
 if uploaded_file is not None:
     # Read CSV
     try:
         df = pd.read_csv(uploaded_file, sep=None, engine='python')
-        st.success(f"✅ Datei geladen! ({len(df)} Zeilen)")
-        
+        st.success(f"Datei erfolgreich geladen ({len(df)} Zeilen).")        
         # Display preview
         with st.expander("📋 Vorschau der Daten"):
             st.dataframe(df.head(10))
@@ -66,12 +78,27 @@ if uploaded_file is not None:
                     # Display statistics
                     st.subheader("📊 Statistiken")
                     col1, col2 = st.columns(2)
+
                     with col1:
+
                         st.metric("Anzahl Datenpunkte", len(x))
+
                     with col2:
-                        st.metric("Korrelation", f"{np.corrcoef(x, y)[0, 1]:.3f}")
-    
+
+                        korrelation = np.corrcoef(x, y)[0, 1]
+
+                        if korrelation >= 0.95:
+
+                            st.success(f"Korrelation: {korrelation:.3f} – Sehr gut")
+
+                        elif korrelation >= 0.90:
+
+                            st.warning(f"Korrelation: {korrelation:.3f} – Akzeptabel")
+
+                        else:
+
+                            st.error(f"Korrelation: {korrelation:.3f} – Schwach")
+
+                        
     except Exception as e:
         st.error(f"❌ Fehler beim Einlesen der Datei: {e}")
-else:
-    st.info("👆 Bitte lade eine CSV-Datei hoch um zu starten")

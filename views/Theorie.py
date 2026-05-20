@@ -1,40 +1,76 @@
 import streamlit as st
 
 st.markdown("""
-    <style>
-        .block-box {
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 16px 20px;
-            margin-bottom: 12px;
-        }
-        .block-box h4 {
-            margin: 0 0 6px 0;
-            font-size: 15px;
-            color: #111;
-        }
-        .block-box p {
-            margin: 0;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.7;
-        }
-    </style>
+
+<style>
+
+    .block-box {
+
+        background: #f8f9fa;
+
+        border: 1px solid #e0e0e0;
+
+        border-radius: 14px;
+
+        padding: 20px 24px;
+
+        margin-bottom: 18px;
+
+    }
+
+    .block-box h4 {
+
+        margin: 0 0 10px 0;
+
+        font-size: 1.3rem;
+
+        font-weight: 600;
+
+        color: #111827;
+
+    }
+
+    .block-box p {
+
+        margin: 0;
+
+        font-size: 1.05rem;
+
+        color: #4b5563;
+
+        line-height: 1.8;
+
+    }
+
+</style>
+
 """, unsafe_allow_html=True)
 
-st.title("Passing-Bablok-Verfahren")
-st.caption("Methodenvergleich in der Labordiagnostik")
-
 st.markdown("""
-Das Passing-Bablok-Verfahren ist eine **nicht-parametrische Regressionsmethode**, 
-die verwendet wird, um zwei Messmethoden miteinander zu vergleichen, zum Beispiel 
+
+<h1 style='text-align: center; margin-bottom: 0; font-size: 3.5rem;'>
+Passing-Bablok-Verfahren
+
+</h1>
+
+<h3 style='text-align: center; color: #6c757d; margin-top: 0;'>
+
+Methodenvergleich in der Labordiagnostik
+
+</h3>
+
+""", unsafe_allow_html=True)
+st.markdown("""
+
+Das Passing-Bablok-Verfahren ist eine **nicht-parametrische Regressionsmethode**,
+die verwendet wird, um zwei Messmethoden miteinander zu vergleichen, zum Beispiel
 eine neue Labormethode mit einer etablierten Referenzmethode.
+
 """)
 
 st.divider()
 
-st.subheader("Grundidee")
+st.subheader("Grundidee:")
 
 st.markdown("""
 <div class="block-box">

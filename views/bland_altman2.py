@@ -2,21 +2,34 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from functions.bland_altman import create_bland_altman_plot, bland_altman_analysis, calculate_bias_percentage
-from utils.data_manager import DataManager
+st.markdown("""
 
-st.set_page_config(page_title="Bland-Altman Analyzer", layout="wide")
+<h1 style='text-align: center; margin-bottom: 0; font-size: 3.5rem;'>
+Bland-Altman Analyse 📊 
+</h1>
+<h3 style='text-align: center; color: #6c757d; margin-top: 0;'>
+Vergleich zweier Messmethoden
 
-st.title("📊 Bland-Altman Analyzer")
-st.markdown("Bewertung der Übereinstimmung zwischen zwei Messmethoden mittels Bland-Altman Plot")
+</h3>
+""", unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+st.info("Laden Sie eine CSV-Datei mit Ihren Messwerten hoch. Die Analyse wird automatisch durchgeführt.")
+
+st.markdown("<br>", unsafe_allow_html=True)
 
 # CSV Upload
-uploaded_file = st.file_uploader("CSV-Datei hochladen", type="csv")
-
+uploaded_file = st.file_uploader(
+    "CSV-Datei hochladen",
+    type="csv",
+    key="bland_altman_upload"
+)
 if uploaded_file is not None:
     # Read CSV
     try:
         df = pd.read_csv(uploaded_file, sep=None, engine='python')
-        st.success(f"✅ Datei geladen! ({len(df)} Zeilen)")
+        st.success(f"Datei erfolgreich geladen! ({len(df)} Zeilen)")
         
         # Display preview
         with st.expander("📋 Vorschau der Daten"):
@@ -102,5 +115,3 @@ if uploaded_file is not None:
     
     except Exception as e:
         st.error(f"❌ Fehler beim Einlesen der Datei: {e}")
-else:
-    st.info("👆 Bitte lade eine CSV-Datei hoch um zu starten")
