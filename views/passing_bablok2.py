@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from functions.passing_bablok import create_comparison_plot
+from utils.data_manager import DataManager
 
 st.set_page_config(page_title="Passing-Bablok Analyzer", layout="wide")
 
@@ -52,6 +53,15 @@ if uploaded_file is not None:
                     st.subheader("📈 Vergleich der Regressionsmethoden")
                     fig = create_comparison_plot(x, y, x_label, y_label)
                     st.pyplot(fig)
+
+                    col1, col2 = st.columns([1, 1])  # ← HIER: gleicher Einzug wie st.pyplot()
+                    with col1:
+                        if st.button("💾 Zu switchdrive hochladen"):
+                            dm = DataManager(fs_protocol='webdav', fs_root_folder='Data_Analyzer')
+                            timestamp = pd.Timestamp.now().strftime("%Y%m%d_%H%M%S")
+                            filename = f"bland_altman_{timestamp}.png"
+                            dm.save_plot(fig, filename)
+                            st.success(f"✅ Plot gespeichert: {filename}")
                     
                     # Display statistics
                     st.subheader("📊 Statistiken")

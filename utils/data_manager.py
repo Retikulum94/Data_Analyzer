@@ -43,6 +43,7 @@ class DataManager:
             fs_root_folder (str): Base directory path for all file operations.
         """
         if hasattr(self, 'fs'):
+            self.fs_root_folder = fs_root_folder
             return
         self.fs_root_folder = fs_root_folder
         self.fs = self._init_filesystem(fs_protocol)
@@ -193,3 +194,22 @@ class DataManager:
             return data + [record_dict]
         else:
             raise ValueError("DataManager: data must be a DataFrame or a list")
+        
+    def save_plot(self, figure, file_name, subfolder=None):
+        """
+        Speichert eine Matplotlib Figure als PNG auf switchdrive.
+        
+        Args:
+            figure: matplotlib figure object
+            file_name: Name der Datei (z.B. 'bland_altman_plot.png')
+            subfolder: Optional, z.B. 'plots' für app_data/plots/
+        """
+        from io import BytesIO
+        
+        buffer = BytesIO()
+        figure.savefig(buffer, format='png', dpi=300, bbox_inches='tight')
+        buffer.seek(0)
+        
+                
+        dh = self._get_data_handler(subfolder)
+        dh.write_binary(file_name, buffer.getvalue())
