@@ -7,5 +7,3 @@ fsspec
 scipy
 numpy
 matplotlib
-io
-utils.data_manager
