@@ -790,8 +790,9 @@ elif page == "Ergebnisse interpretieren":
             - Sehr enge LoA
             - Sehr gute Übereinstimmung
             - **Fazit:** Analyzer kann etabliertes Gerät ersetzen!
+            """)
 
-else:
+elif page == "Häufig gestellte Fragen":
     st.header(" Häufig gestellte Fragen (FAQ)")
     
     st.subheader("Allgemeine Fragen")
