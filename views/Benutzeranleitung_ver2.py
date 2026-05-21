@@ -1,5 +1,4 @@
 import streamlit as st
-st.set_page_config(page_title="Benutzeranleitung - Passing-Bablok Analyzer", layout="wide")
 
 st.markdown("""
     <style>
@@ -39,8 +38,24 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title(" Benutzeranleitung: Passing-Bablok Analyzer")
-st.markdown("---")
+
+st.markdown("""
+
+<h1 style='text-align: center; margin-bottom: 0; font-size: 3.5rem;'>
+Benutzeranleitung
+
+</h1>
+
+<h3 style='text-align: center; color: #6c757d; margin-top: 0;'>
+
+Passing-Bablok Analyzer
+
+</h3>
+
+""", unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
 
 st.sidebar.title(" Inhaltsverzeichnis")
 page = st.sidebar.radio("Wähle einen Bereich:", [
@@ -51,6 +66,7 @@ page = st.sidebar.radio("Wähle einen Bereich:", [
     "Ergebnisse interpretieren",
     "Häufig gestellte Fragen"
 ])
+
 
 if page == "Übersicht":
     st.header(" Was ist der Passing-Bablok Analyzer?")
@@ -797,9 +813,5 @@ else:
     """, unsafe_allow_html=True)
 
 st.markdown("---")
-st.markdown("""
-<div style='text-align: center; color: #666; margin-top: 30px;'>
-<p><small> Benutzeranleitung für Passing-Bablok Analyzer | Version 1.0</small></p>
-<p><small>Zuletzt aktualisiert: 2024</small></p>
-</div>
-""", unsafe_allow_html=True)
+
+st.caption("Benutzeranleitung für den Passing-Bablok Analyzer")

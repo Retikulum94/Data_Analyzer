@@ -48,7 +48,7 @@ Benutzeranleitung
 
 <h3 style='text-align: center; color: #6c757d; margin-top: 0;'>
 
-Passing-Bablok Analyzer
+Passing-Bablok & Bland-Altman Analyzer
 
 </h3>
 
@@ -56,7 +56,14 @@ Passing-Bablok Analyzer
 
 st.markdown("<br>", unsafe_allow_html=True)
 
+# Analyzer-Auswahl in der Sidebar
+st.sidebar.title(" Analyzertyp")
+analyzer_type = st.sidebar.radio("Wähle den Analyzer:", [
+    "Passing-Bablok",
+    "Bland-Altman"
+])
 
+st.sidebar.markdown("---")
 st.sidebar.title(" Inhaltsverzeichnis")
 page = st.sidebar.radio("Wähle einen Bereich:", [
     "Übersicht",
@@ -69,48 +76,91 @@ page = st.sidebar.radio("Wähle einen Bereich:", [
 
 
 if page == "Übersicht":
-    st.header(" Was ist der Passing-Bablok Analyzer?")
+    st.header(" Was ist ein Analyzer?")
     
     col1, col2 = st.columns([1, 1])
     
-    with col1:
-        st.markdown("""
-        Der **Passing-Bablok Analyzer** ist ein statistisches Werkzeug, das zwei verschiedene 
-        Methoden zur linearen Regressionsanalyse vergleicht:
+    if analyzer_type == "Passing-Bablok":
+        with col1:
+            st.markdown("""
+            Der **Passing-Bablok Analyzer** ist ein statistisches Werkzeug, das zwei verschiedene 
+            Methoden zur linearen Regressionsanalyse vergleicht:
+            
+            ###  Die zwei Methoden
+            
+            **1. Least-Squares Methode**
+            - Klassische lineare Regression
+            - Minimiert die Fehlerquadrate
+            - Kann durch Ausreißer verzerrt werden
+            
+            **2. Passing-Bablok Methode**
+            - Robuste Alternative zur Least-Squares
+            - Symmetrisch (keine Unterscheidung zwischen x und y)
+            - Weniger empfindlich gegenüber Ausreißern
+            - Ideal für Vergleiche zwischen Messmethoden
+            """)
         
-        ###  Die zwei Methoden
+        with col2:
+            st.markdown("""
+            ###  Anwendungsbeispiele
+            
+            - Vergleich von zwei Messinstrumenten
+            - Validierung neuer Messmethoden
+            - Medizinische Laboranalysen
+            - Qualitätskontrolle
+            - Kalibrationsvergleiche
+            
+            ###  Was erhalte ich?
+            
+            - Vergleich beider Regressionsmethoden
+            - Steigungskoeffizient (Slope)
+            - Achsenabschnitt (Intercept)
+            - Konfidenzintervalle
+            - Visualisierung als Grafik
+            - Korrelationskoeffizient
+            """)
+    else:  # Bland-Altman
+        with col1:
+            st.markdown("""
+            Der **Bland-Altman Analyzer** ist ein statistisches Werkzeug zur Beurteilung 
+            der Übereinstimmung zwischen zwei Messmethoden:
+            
+            ###  Die Bland-Altman Methode
+            
+            - Analysiert Unterschiede zwischen zwei Methoden
+            - Zeigt systematische Fehler (Bias)
+            - Berechnet Grenzen der Übereinstimmung
+            - Ideal für Methodenvergleiche in der Klinik
+            - Nicht-parametrisch und robust
+            
+            **Unterschied zur Passing-Bablok:**
+            - Nicht auf Regression basiert
+            - Fokus auf Unterschiede, nicht auf Korrelation
+            - Bessere Visualisierung von Abweichungen
+            - Standard in medizinischen Validierungen
+            """)
         
-        **1. Least-Squares Methode**
-        - Klassische lineare Regression
-        - Minimiert die Fehlerquadrate
-        - Kann durch Ausreißer verzerrt werden
-        
-        **2. Passing-Bablok Methode**
-        - Robuste Alternative zur Least-Squares
-        - Symmetrisch (keine Unterscheidung zwischen x und y)
-        - Weniger empfindlich gegenüber Ausreißern
-        - Ideal für Vergleiche zwischen Messmethoden
-        """)
+        with col2:
+            st.markdown("""
+            ###  Anwendungsbeispiele
+            
+            - Validierung von Messinstrumenten
+            - Medizinische Methodenvergleiche
+            - Klinische Laboranalysen
+            - Gerätevalidierung
+            - Methodenwechsel in der Klinik
+            
+            ###  Was erhalte ich?
+            
+            - Bland-Altman Plot (Differenzen vs. Mittelwerte)
+            - Mittlere Differenz (Bias)
+            - Grenzen der Übereinstimmung (LoA)
+            - Standardabweichung der Differenzen
+            - Bias-Prozentsätze
+            - Detaillierte statistische Kennzahlen
+            """)
     
-    with col2:
-        st.markdown("""
-        ###  Anwendungsbeispiele
-        
-        - Vergleich von zwei Messinstrumenten
-        - Validierung neuer Messmethoden
-        - Medizinische Laboranalysen
-        - Qualitätskontrolle
-        - Kalibrationsvergleiche
-        
-        ###  Was erhalte ich?
-        
-        - Vergleich beider Regressionsmethoden
-        - Steigungskoeffizient (Slope)
-        - Achsenabschnitt (Intercept)
-        - Konfidenzintervalle
-        - Visualisierung als Grafik
-        - Korrelationskoeffizient
-        """)
+    st.markdown("---")
     
     st.markdown("---")
     st.markdown("""
@@ -119,7 +169,7 @@ if page == "Übersicht":
     <ol>
         <li><strong>CSV vorbereiten:</strong> Datei aus Excel exportieren</li>
         <li><strong>Datei hochladen:</strong> CSV in die App laden</li>
-        <li><strong>Spalten wählen:</strong> X- und Y-Achse definieren</li>
+        <li><strong>Spalten wählen:</strong> Referenz- und Testmessung definieren</li>
         <li><strong>Ergebnisse ansehen:</strong> Grafiken und Statistiken interpretieren</li>
     </ol>
     </div>
@@ -438,177 +488,347 @@ elif page == "Ergebnisse interpretieren":
     Hier erklären wir, was sie bedeuten.
     """)
     
-    st.subheader(" Die Vergleichsgrafik")
-    
-    st.markdown("""
-    Die Grafik zeigt zwei Regressionsllinien in einem Scatterplot:
-    
-    - **Rote Linie:** Least-Squares Regression
-    - **Blaue Linie:** Passing-Bablok Regression
-    - **Punkte:** Deine Messwerte
-    
-    **Was bedeutet das?**
-    - Wenn beide Linien sehr ähnlich sind: Beide Methoden funktionieren gut
-    - Wenn sie stark abweichen: Passing-Bablok ist robuster (bei Ausreißern)
-    """)
-    
-    st.subheader(" Die wichtigsten Statistiken")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("""
-        #### Anzahl Datenpunkte
-        **Was ist das?** Die Anzahl der gültigen Messungen
+    if analyzer_type == "Passing-Bablok":
+        st.subheader(" Die Vergleichsgrafik")
         
-        **Was ist gut?**
-        - Je mehr Datenpunkte, desto zuverlässiger
-        - Mindestens 20-30 Punkte empfohlen
-        - Mindestens 2 erforderlich
-        """)
-    
-    with col2:
         st.markdown("""
-        #### Korrelation
-        **Was ist das?** Misst, wie gut die Werte zusammenhängen
+        Die Grafik zeigt zwei Regressionsllinien in einem Scatterplot:
         
-        **Was ist gut?**
-        - Wert zwischen -1 und +1
-        - 1 = perfekte positive Korrelation
-        - > 0.95 = sehr gut
-        - > 0.90 = gut
-        - < 0.80 = fragwürdig
+        - **Rote Linie:** Least-Squares Regression
+        - **Blaue Linie:** Passing-Bablok Regression
+        - **Punkte:** Deine Messwerte
+        
+        **Was bedeutet das?**
+        - Wenn beide Linien sehr ähnlich sind: Beide Methoden funktionieren gut
+        - Wenn sie stark abweichen: Passing-Bablok ist robuster (bei Ausreißern)
         """)
-    
-    st.subheader(" Regressionskoeffizienten")
-    
-    st.markdown("""
-    <div class="guide-section">
-    <h4>Slope (Steigung)</h4>
-    <p><strong>Bedeutung:</strong> Der Proportionalitätsfaktor zwischen den beiden Messungen</p>
-    <ul>
-        <li><strong>Ideal:</strong> Slope ≈ 1.0 (beide Methoden sind proportional)</li>
-        <li><strong>Beispiel Slope = 1.05:</strong> Neue Methode ist 5% höher</li>
-        <li><strong>Beispiel Slope = 0.95:</strong> Neue Methode ist 5% niedriger</li>
-    </ul>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("""
-    <div class="guide-section">
-    <h4>Intercept (Achsenabschnitt)</h4>
-    <p><strong>Bedeutung:</strong> Der systematische Versatz zwischen den Methoden</p>
-    <ul>
-        <li><strong>Ideal:</strong> Intercept ≈ 0.0 (keine Verschiebung)</li>
-        <li><strong>Beispiel Intercept = 5:</strong> Neue Methode ist systematisch 5 Einheiten höher</li>
-        <li><strong>Beispiel Intercept = -2:</strong> Neue Methode ist systematisch 2 Einheiten niedriger</li>
-    </ul>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("""
-    <div class="guide-section">
-    <h4>Konfidenzintervalle (95% CI)</h4>
-    <p><strong>Bedeutung:</strong> Der Bereich, in dem der wahre Wert mit 95% Sicherheit liegt</p>
-    <ul>
-        <li>Gibt die Genauigkeit der Schätzung an</li>
-        <li>Schmale Intervalle = Präzise Schätzung</li>
-        <li>Breite Intervalle = Weniger genaue Schätzung</li>
-        <li>Wenn beide Methoden ähnliche Intervalle haben: Gut!</li>
-    </ul>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.subheader(" Was bedeutet ein gutes Ergebnis?")
-    
-    col1, col2 = st.columns([1, 1])
-    
-    with col1:
+        
+        st.subheader(" Die wichtigsten Statistiken")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("""
+            #### Anzahl Datenpunkte
+            **Was ist das?** Die Anzahl der gültigen Messungen
+            
+            **Was ist gut?**
+            - Je mehr Datenpunkte, desto zuverlässiger
+            - Mindestens 20-30 Punkte empfohlen
+            - Mindestens 2 erforderlich
+            """)
+        
+        with col2:
+            st.markdown("""
+            #### Korrelation
+            **Was ist das?** Misst, wie gut die Werte zusammenhängen
+            
+            **Was ist gut?**
+            - Wert zwischen -1 und +1
+            - 1 = perfekte positive Korrelation
+            - > 0.95 = sehr gut
+            - > 0.90 = gut
+            - < 0.80 = fragwürdig
+            """)
+        
+        st.subheader(" Regressionskoeffizienten")
+        
         st.markdown("""
-        **Ausgezeichnet:**
-        -  Korrelation > 0.95
-        -  Slope 0.98 - 1.02
-        -  Intercept sehr nah bei 0
-        -  Beide Linien fast identisch
-        """)
-    
-    with col2:
+        <div class="guide-section">
+        <h4>Slope (Steigung)</h4>
+        <p><strong>Bedeutung:</strong> Der Proportionalitätsfaktor zwischen den beiden Messungen</p>
+        <ul>
+            <li><strong>Ideal:</strong> Slope ≈ 1.0 (beide Methoden sind proportional)</li>
+            <li><strong>Beispiel Slope = 1.05:</strong> Neue Methode ist 5% höher</li>
+            <li><strong>Beispiel Slope = 0.95:</strong> Neue Methode ist 5% niedriger</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        
         st.markdown("""
-        **Prüfwert:**
-        -  Korrelation 0.90 - 0.95
-        -  Slope 0.95 - 1.05
-        -  Linien unterscheiden sich
-        -  Ausreißer sichtbar
-        """)
-    
-    st.subheader(" Was bedeutet ein schlechtes Ergebnis?")
-    
-    st.markdown("""
-    <div class="warning-box">
-    <h4>Probleme erkennen:</h4>
-    <ul>
-        <li><strong>Korrelation < 0.80:</strong> Die Methoden messen Unterschiedliches</li>
-        <li><strong>Slope >> 1 oder << 1:</strong> Systematischer Unterschied</li>
-        <li><strong>Linien stark unterschiedlich:</strong> Ausreißer beeinflussen LS-Methode stark</li>
-        <li><strong>Viele Punkte weit entfernt:</strong> Möglicherweise Messfehler</li>
-    </ul>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.subheader(" Beispiel: Interpretation")
-    
-    with st.expander(" Szenario: Blutdruckmessgeräte"):
+        <div class="guide-section">
+        <h4>Intercept (Achsenabschnitt)</h4>
+        <p><strong>Bedeutung:</strong> Der systematische Versatz zwischen den Methoden</p>
+        <ul>
+            <li><strong>Ideal:</strong> Intercept ≈ 0.0 (keine Verschiebung)</li>
+            <li><strong>Beispiel Intercept = 5:</strong> Neue Methode ist systematisch 5 Einheiten höher</li>
+            <li><strong>Beispiel Intercept = -2:</strong> Neue Methode ist systematisch 2 Einheiten niedriger</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        
         st.markdown("""
-        **Daten:** Vergleich eines neuen digitalen mit einem analogen Blutdruckmessgerät
+        <div class="guide-section">
+        <h4>Konfidenzintervalle (95% CI)</h4>
+        <p><strong>Bedeutung:</strong> Der Bereich, in dem der wahre Wert mit 95% Sicherheit liegt</p>
+        <ul>
+            <li>Gibt die Genauigkeit der Schätzung an</li>
+            <li>Schmale Intervalle = Präzise Schätzung</li>
+            <li>Breite Intervalle = Weniger genaue Schätzung</li>
+            <li>Wenn beide Methoden ähnliche Intervalle haben: Gut!</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
         
-        **Ergebnisse:**
-        - Korrelation: 0.97 
-        - Least-Squares Slope: 1.02
-        - Passing-Bablok Slope: 1.00
-        - Intercept: 0.5 mmHg
+        st.subheader(" Was bedeutet ein gutes Ergebnis?")
         
-        **Interpretation:**
-        - Sehr gute Korrelation → Methoden messen das Gleiche
-        - Sehr ähnliche Slopes → Beide gut
-        - Minimaler Intercept → Kein systematischer Fehler
-        - **Fazit:** Neue Methode validiert! 
-        """)
-    
-    with st.expander(" Szenario: Glucosemessgeräte (Problematisch)"):
+        col1, col2 = st.columns([1, 1])
+        
+        with col1:
+            st.markdown("""
+            **Ausgezeichnet:**
+            -  Korrelation > 0.95
+            -  Slope 0.98 - 1.02
+            -  Intercept sehr nah bei 0
+            -  Beide Linien fast identisch
+            """)
+        
+        with col2:
+            st.markdown("""
+            **Prüfwert:**
+            -  Korrelation 0.90 - 0.95
+            -  Slope 0.95 - 1.05
+            -  Linien unterscheiden sich
+            -  Ausreißer sichtbar
+            """)
+        
+        st.subheader(" Was bedeutet ein schlechtes Ergebnis?")
+        
         st.markdown("""
-        **Daten:** Vergleich von zwei Glucosemessgeräten
+        <div class="warning-box">
+        <h4>Probleme erkennen:</h4>
+        <ul>
+            <li><strong>Korrelation < 0.80:</strong> Die Methoden messen Unterschiedliches</li>
+            <li><strong>Slope >> 1 oder << 1:</strong> Systematischer Unterschied</li>
+            <li><strong>Linien stark unterschiedlich:</strong> Ausreißer beeinflussen LS-Methode stark</li>
+            <li><strong>Viele Punkte weit entfernt:</strong> Möglicherweise Messfehler</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
         
-        **Ergebnisse:**
-        - Korrelation: 0.82 
-        - Least-Squares Slope: 1.15
-        - Passing-Bablok Slope: 1.08
-        - Intercept: 15 mg/dL
+        st.subheader(" Beispiel: Interpretation")
         
-        **Interpretation:**
-        - Akzeptable aber nicht ideale Korrelation
-        - Unterschiedliche Slopes → Systematischer Fehler
-        - Großer Intercept → Neue Methode misst ~15 mg/dL höher
-        - **Fazit:** Geräte stimmen nicht überein, Kalibrierung nötig! 
+        with st.expander(" Szenario: Blutdruckmessgeräte"):
+            st.markdown("""
+            **Daten:** Vergleich eines neuen digitalen mit einem analogen Blutdruckmessgerät
+            
+            **Ergebnisse:**
+            - Korrelation: 0.97 
+            - Least-Squares Slope: 1.02
+            - Passing-Bablok Slope: 1.00
+            - Intercept: 0.5 mmHg
+            
+            **Interpretation:**
+            - Sehr gute Korrelation → Methoden messen das Gleiche
+            - Sehr ähnliche Slopes → Beide gut
+            - Minimaler Intercept → Kein systematischer Fehler
+            - **Fazit:** Neue Methode validiert! 
+            """)
+        
+        with st.expander(" Szenario: Glucosemessgeräte (Problematisch)"):
+            st.markdown("""
+            **Daten:** Vergleich von zwei Glucosemessgeräten
+            
+            **Ergebnisse:**
+            - Korrelation: 0.82 
+            - Least-Squares Slope: 1.15
+            - Passing-Bablok Slope: 1.08
+            - Intercept: 15 mg/dL
+            
+            **Interpretation:**
+            - Akzeptable aber nicht ideale Korrelation
+            - Unterschiedliche Slopes → Systematischer Fehler
+            - Großer Intercept → Neue Methode misst ~15 mg/dL höher
+            - **Fazit:** Geräte stimmen nicht überein, Kalibrierung nötig! 
+            """)
+    
+    else:  # Bland-Altman
+        st.subheader(" Das Bland-Altman Diagramm")
+        
+        st.markdown("""
+        Das Bland-Altman Diagramm zeigt:
+        
+        - **X-Achse:** Mittelwert der beiden Messungen ((x+y)/2)
+        - **Y-Achse:** Differenz zwischen den Messungen (y-x)
+        - **Rote horizontale Linie:** Mittlere Differenz (Bias)
+        - **Gestrichelte Linien:** Grenzen der Übereinstimmung (LoA)
+        - **Punkte:** Einzelne Messpaare
+        
+        **Was bedeutet das?**
+        - Punkte sollten symmetrisch um die mittlere Differenz liegen
+        - 95% der Punkte sollten innerhalb der LoA-Linien liegen
+        - Keine Trends oder Muster sind ideal
         """)
+        
+        st.subheader(" Die wichtigsten Statistiken")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("""
+            #### Anzahl Datenpunkte
+            **Was ist das?** Die Anzahl der Messpaare
+            
+            **Was ist gut?**
+            - Je mehr Datenpunkte, desto zuverlässiger
+            - Mindestens 30-50 Punkte empfohlen
+            - Mindestens 2 erforderlich
+            """)
+        
+        with col2:
+            st.markdown("""
+            #### Bias (mittlere Differenz)
+            **Was ist das?** Systematischer Fehler zwischen Methoden
+            
+            **Was ist gut?**
+            - Wert sollte nahe bei 0 liegen
+            - Negative Werte: Methode 2 misst niedriger
+            - Positive Werte: Methode 2 misst höher
+            """)
+        
+        st.subheader(" Grenzen der Übereinstimmung (LoA)")
+        
+        st.markdown("""
+        <div class="guide-section">
+        <h4>Limits of Agreement (LoA)</h4>
+        <p><strong>Bedeutung:</strong> Bereich, in dem 95% der Unterschiede liegen</p>
+        <ul>
+            <li><strong>Formel:</strong> Bias ± 1.96 × SD der Differenzen</li>
+            <li><strong>Interpretation:</strong> Die meisten Messungen unterscheiden sich um maximal diesen Betrag</li>
+            <li><strong>Schmaler Bereich:</strong> Methoden stimmen gut überein</li>
+            <li><strong>Breiter Bereich:</strong> Größere Unterschiede zwischen Methoden</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.subheader(" Was bedeutet ein gutes Ergebnis?")
+        
+        col1, col2 = st.columns([1, 1])
+        
+        with col1:
+            st.markdown("""
+            **Ausgezeichnet:**
+            -  Bias nahe bei 0
+            -  Enge LoA
+            -  Keine Trends im Plot
+            -  Alle Punkte innerhalb LoA
+            -  Symmetrische Verteilung
+            """)
+        
+        with col2:
+            st.markdown("""
+            **Prüfwert:**
+            -  Bias < 10% des Messbereichs
+            -  Breitere LoA akzeptabel
+            -  Leichte Trends sichtbar
+            -  Wenige Punkte außerhalb LoA
+            """)
+        
+        st.subheader(" Was bedeutet ein schlechtes Ergebnis?")
+        
+        st.markdown("""
+        <div class="warning-box">
+        <h4>Probleme erkennen:</h4>
+        <ul>
+            <li><strong>Großer Bias:</strong> Systematischer Unterschied zwischen Methoden</li>
+            <li><strong>Sehr breite LoA:</strong> Methoden stimmen nicht überein</li>
+            <li><strong>Trend (Steigung):</strong> Unterschied hängt von Messgröße ab</li>
+            <li><strong>Viele Ausreißer:</strong> Zu viele Punkte außerhalb LoA</li>
+            <li><strong>Asymmetrische Verteilung:</strong> Nicht-random Unterschiede</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.subheader(" Beispiele: Interpretation")
+        
+        with st.expander(" Szenario: Pulsmesser-Validierung"):
+            st.markdown("""
+            **Daten:** Vergleich eines neuen Smartwatch-Pulsmessers mit ECG-Standard
+            
+            **Ergebnisse:**
+            - Bias: 1.2 bpm
+            - LoA: [-4.5, 6.9] bpm
+            - Anzahl Punkte: 45
+            - Trend: Nein
+            
+            **Interpretation:**
+            - Sehr kleiner systematischer Fehler (1.2 bpm)
+            - Akzeptable Grenzen der Übereinstimmung
+            - 95% der Messungen unterscheiden sich maximal um 6.9 bpm
+            - **Fazit:** Smartwatch ist klinisch akzeptabel!
+            """)
+        
+        with st.expander(" Szenario: Blutdruck-Geräte (Problematisch)"):
+            st.markdown("""
+            **Daten:** Vergleich zweier Blutdruckmessgeräte
+            
+            **Ergebnisse:**
+            - Bias: 8.5 mmHg
+            - LoA: [-15.2, 32.2] mmHg
+            - Anzahl Punkte: 50
+            - Trend: Ja (Steigung erkennbar)
+            
+            **Interpretation:**
+            - Großer systematischer Fehler (8.5 mmHg höher)
+            - Sehr breite LoA → Schlechte Übereinstimmung
+            - Trend deutet auf Abhängigkeit vom Messniveau hin
+            - **Fazit:** Geräte nicht austauschbar, Kalibrierung nötig!
+            """)
+        
+        with st.expander(" Szenario: Laborwert-Analyzer"):
+            st.markdown("""
+            **Daten:** Vergleich eines neuen mit etabliertem Analyzer
+            
+            **Ergebnisse:**
+            - Bias: 0.3 mg/dL
+            - LoA: [-2.1, 2.7] mg/dL
+            - Anzahl Punkte: 120
+            - Trend: Nein
+            
+            **Interpretation:**
+            - Minimaler Bias
+            - Sehr enge LoA
+            - Sehr gute Übereinstimmung
+            - **Fazit:** Analyzer kann etabliertes Gerät ersetzen!
 
 else:
     st.header(" Häufig gestellte Fragen (FAQ)")
     
     st.subheader("Allgemeine Fragen")
     
-    with st.expander("Wann sollte ich Passing-Bablok nutzen statt Least-Squares?"):
+    with st.expander("Wann sollte ich Passing-Bablok vs. Bland-Altman nutzen?"):
         st.markdown("""
-        **Passing-Bablok ist besser, wenn:**
-        - Du zwei verschiedene Messmethoden vergleichst
-        - Ausreißer in den Daten vorhanden sind
-        - Beide Variablen Messfehler haben (nicht nur eine)
-        - Du Geräte validieren möchtest
+        **Passing-Bablok verwenden für:**
+        - Vergleich von zwei Messmethoden mit Regressionsanalyse
+        - Wenn du die Beziehung zwischen Methoden beschreiben möchtest
+        - Wenn Ausreißer möglich sind (robuste Methode)
+        - Wenn Slope und Intercept wichtig sind
         
-        **Least-Squares ist besser, wenn:**
-        - Du eine Variable vorhersagen möchtest (z.B. Preis aus Größe)
-        - Es klare Abhängigkeiten gibt
-        - Nur eine Variable fehlerhaft ist
+        **Bland-Altman verwenden für:**
+        - Beurteilung der Übereinstimmung zwischen Methoden
+        - Wenn du Grenzen der Übereinstimmung brauchst
+        - In klinischen Validierungsstudien (Standard)
+        - Wenn du Bias und Variabilität analysieren möchtest
+        
+        **Kurz gesagt:**
+        - **Passing-Bablok:** "Wie korrelieren die Methoden?"
+        - **Bland-Altman:** "Stimmen die Methoden überein?"
         """)
+    
+    if analyzer_type == "Passing-Bablok":
+        with st.expander("Wann sollte ich Passing-Bablok nutzen statt Least-Squares?"):
+            st.markdown("""
+            **Passing-Bablok ist besser, wenn:**
+            - Du zwei verschiedene Messmethoden vergleichst
+            - Ausreißer in den Daten vorhanden sind
+            - Beide Variablen Messfehler haben (nicht nur eine)
+            - Du Geräte validieren möchtest
+            
+            **Least-Squares ist besser, wenn:**
+            - Du eine Variable vorhersagen möchtest (z.B. Preis aus Größe)
+            - Es klare Abhängigkeiten gibt
+            - Nur eine Variable fehlerhaft ist
+            """)
     
     with st.expander("Wie viele Datenpunkte brauche ich?"):
         st.markdown("""
@@ -620,6 +840,8 @@ else:
         - 100+ Punkte für hochwertige Validierungen
         
         **Je mehr Daten, desto besser die Ergebnisse!**
+        
+        **Speziell für Bland-Altman:** Mindestens 30-50 Punkte empfohlen für zuverlässige LoA
         """)
     
     with st.expander("Was sind NaN-Werte und warum werden sie entfernt?"):
@@ -636,6 +858,63 @@ else:
         - Es ist korrekt, nur vollständige Datenpunkte zu nutzen
         - Ein Datenpunkt ist nur gültig, wenn beide Messwerte vorhanden sind
         """)
+    
+    if analyzer_type == "Bland-Altman":
+        st.subheader("Bland-Altman spezifische Fragen")
+        
+        with st.expander("Was bedeutet Bias und wann ist er akzeptabel?"):
+            st.markdown("""
+            **Bias:** Der systematische Unterschied zwischen zwei Methoden
+            
+            **Bedeutung:**
+            - Positive Bias: Methode 2 misst im Durchschnitt höher
+            - Negative Bias: Methode 2 misst im Durchschnitt niedriger
+            - Bias = 0: Keine systematischen Unterschiede
+            
+            **Wann ist Bias akzeptabel?**
+            - < 5% des Messbereichs: Sehr gut
+            - 5-10% des Messbereichs: Akzeptabel
+            - > 10% des Messbereichs: Problematisch
+            
+            **Beispiel:** Blutdruck-Messbereich ist etwa 40-200 mmHg
+            - 5% = 8 mmHg → Akzeptabler Bias
+            - 20 mmHg Bias → Problematisch
+            """)
+        
+        with st.expander("Was sind Limits of Agreement (LoA)?"):
+            st.markdown("""
+            **LoA = Grenzen der Übereinstimmung**
+            
+            **Definition:** Der Bereich, in dem 95% der Unterschiede zwischen Methoden liegen
+            
+            **Berechnung:** 
+            - Mittlere Differenz ± 1.96 × Standardabweichung der Differenzen
+            
+            **Interpretation:**
+            - Schmale LoA → Gute Übereinstimmung
+            - Breite LoA → Schlechte Übereinstimmung
+            - Sollte für klinische Entscheidungen klinisch relevant sein
+            
+            **Beispiel:** Wenn LoA = [-5, +5] mmHg
+            - 95% der Messungen unterscheiden sich maximal um 5 mmHg
+            - Ist das für deine Anwendung akzeptabel?
+            """)
+        
+        with st.expander("Sind meine Punkte weit außerhalb der LoA - ist das ein Problem?"):
+            st.markdown("""
+            **Normal:** Bis zu 5% der Punkte können außerhalb liegen
+            
+            **Wenn mehr Punkte außerhalb sind:**
+            - Überprüfe Dateneingabe auf Fehler
+            - Möglicherweise Ausreißer vorhanden
+            - Unterscheiden sich diese Messungen systematisch?
+            
+            **Was tun?**
+            1. Überprüfe die Rohdaten
+            2. Wenn Fehler: Entferne fehlerhafte Punkte
+            3. Führe Analyse erneut durch
+            4. Dokumentiere, was entfernt wurde
+            """)
     
     st.subheader("Technische Fragen")
     
@@ -687,55 +966,56 @@ else:
     
     st.subheader("Interpretationsfragen")
     
-    with st.expander("Warum unterscheiden sich die beiden Linien?"):
-        st.markdown("""
-        **Die Linien unterscheiden sich, wenn:**
+    if analyzer_type == "Passing-Bablok":
+        with st.expander("Warum unterscheiden sich die beiden Linien?"):
+            st.markdown("""
+            **Die Linien unterscheiden sich, wenn:**
+            
+            1. **Ausreißer vorhanden:** Least-Squares wird davon beeinflusst
+               - Passing-Bablok ist robuster
+            
+            2. **Unterschiedliche Fehlerstrukturen:** Wenn eine Methode fehleranfällig ist
+               - Passing-Bablok behandelt dies symmetrisch
+            
+            3. **Kleine Stichprobe:** Bei wenigen Datenpunkten größere Unterschiede
+            
+            **Große Unterschiede sind OK** - das zeigt, dass Passing-Bablok robuster ist!
+            """)
         
-        1. **Ausreißer vorhanden:** Least-Squares wird davon beeinflusst
-           - Passing-Bablok ist robuster
+        with st.expander("Meine Korrelation ist 0.92 - ist das gut?"):
+            st.markdown("""
+            **Kontext ist wichtig!**
+            
+            **0.92 ist:**
+            -  Sehr gut für medizinische Geräte
+            -  Sehr gut für Labormessungen
+            -  Akzeptabel für Screenings
+            -  Grenzwert für kritische Messungen
+            -  Nicht ausreichend für hochpräzise Kalibrationen
+            
+            **Branchenstandards:**
+            - Klinische Chemie: > 0.95 erwartet
+            - Hämatologie: > 0.93 erwartet
+            - Kohortenstudien: > 0.85 akzeptabel
+            """)
         
-        2. **Unterschiedliche Fehlerstrukturen:** Wenn eine Methode fehleranfällig ist
-           - Passing-Bablok behandelt dies symmetrisch
-        
-        3. **Kleine Stichprobe:** Bei wenigen Datenpunkten größere Unterschiede
-        
-        **Große Unterschiede sind OK** - das zeigt, dass Passing-Bablok robuster ist!
-        """)
-    
-    with st.expander("Meine Korrelation ist 0.92 - ist das gut?"):
-        st.markdown("""
-        **Kontext ist wichtig!**
-        
-        **0.92 ist:**
-        -  Sehr gut für medizinische Geräte
-        -  Sehr gut für Labormessungen
-        -  Akzeptabel für Screenings
-        -  Grenzwert für kritische Messungen
-        -  Nicht ausreichend für hochpräzise Kalibrationen
-        
-        **Branchenstandards:**
-        - Klinische Chemie: > 0.95 erwartet
-        - Hämatologie: > 0.93 erwartet
-        - Kohortenstudien: > 0.85 akzeptabel
-        """)
-    
-    with st.expander("Mein Slope ist 1.25 - was bedeutet das?"):
-        st.markdown("""
-        **Slope 1.25 bedeutet:**
-        
-        Die neue Methode misst 25% höher als die Referenz.
-        
-        **Beispiel mit konkreten Zahlen:**
-        - Referenz misst: 100
-        - Neue Methode misst: 125
-        - Unterschied: 25%
-        
-        **Ist das ein Problem?**
-        - Kommt auf die Anwendung an
-        - < 5% Unterschied: Austauschbar
-        - 5-10% Unterschied: Systematischer Fehler, aber nutzbar
-        - > 10% Unterschied: Möglicherweise Kalibrierung nötig
-        """)
+        with st.expander("Mein Slope ist 1.25 - was bedeutet das?"):
+            st.markdown("""
+            **Slope 1.25 bedeutet:**
+            
+            Die neue Methode misst 25% höher als die Referenz.
+            
+            **Beispiel mit konkreten Zahlen:**
+            - Referenz misst: 100
+            - Neue Methode misst: 125
+            - Unterschied: 25%
+            
+            **Ist das ein Problem?**
+            - Kommt auf die Anwendung an
+            - < 5% Unterschied: Austauschbar
+            - 5-10% Unterschied: Systematischer Fehler, aber nutzbar
+            - > 10% Unterschied: Möglicherweise Kalibrierung nötig
+            """)
     
     st.subheader("Datenvorbereitung - Häufige Fragen")
     
