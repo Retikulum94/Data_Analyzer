@@ -69,6 +69,21 @@ if uploaded_file is not None:
                             filename = f"bland_altman_{timestamp}.png"
                             dm.save_plot(fig, filename)
                             st.success(f"✅ Plot gespeichert: {filename}")
+
+                    with col2:
+                        # Figure in PNG-Format konvertieren
+                        import io
+                        img_buffer = io.BytesIO()
+                        fig.savefig(img_buffer, format='png', dpi=100, bbox_inches='tight')
+                        img_buffer.seek(0)
+                        
+                        timestamp = pd.Timestamp.now().strftime("%Y%m%d_%H%M%S")
+                        st.download_button(
+                            label="⬇️ Download",
+                            data=img_buffer,
+                            file_name=f"bland_altman_{timestamp}.png",
+                            mime="image/png"
+                        )
                     
                     st.subheader("📊 Statistiken")
                     
