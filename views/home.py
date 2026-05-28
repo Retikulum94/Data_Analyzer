@@ -20,8 +20,8 @@ st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("""
 
 <style>
-
-div.stButton > button {
+div.stButton > button,
+div.stButton > a {
     height: 70px;
     font-size: 24px;
     font-weight: 600;
@@ -30,6 +30,7 @@ div.stButton > button {
 </style>
 
 """, unsafe_allow_html=True)
+
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
@@ -42,9 +43,6 @@ with col2:
 
 with col3:
     st.link_button("📁 Verlauf", url="https://drive.switch.ch/index.php/s/9UOKqhPaeV4UsVN", use_container_width=True)
-
-"""with col3:
-    st.button("📁 Verlauf", use_container_width=True)"""
 
 with col4:
     if st.button("❓ Hilfe", use_container_width=True):
