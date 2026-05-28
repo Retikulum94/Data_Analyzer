@@ -41,8 +41,8 @@ with col2:
         st.switch_page("views/bland_altman2.py")
 
 with col3:
-    st.link_button("📁 Verlauf", url="https://drive.switch.ch/index.php/apps/files/?dir=/Data_Analyzer&fileid=9554622236", use_container_width=True)
-    
+    st.link_button("📁 Verlauf", url="https://drive.switch.ch/index.php/s/9UOKqhPaeV4UsVN", use_container_width=True)
+
 """with col3:
     st.button("📁 Verlauf", use_container_width=True)"""
 
