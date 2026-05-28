@@ -23,6 +23,12 @@ uploaded_file = st.file_uploader(
     "CSV-Datei hochladen",
     type="csv"
 )
+# Button zur Benutzeranleitung
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    if st.button("📚 Zur Benutzeranleitung", use_container_width=True):
+        st.switch_page("views/Benutzeranleitung_1.py")
+
 
 if uploaded_file is not None:
     try:

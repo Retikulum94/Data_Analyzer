@@ -21,11 +21,15 @@ st.markdown("""
 
 <style>
 div.stButton > button,
-div.stButton > a {
+div.stLinkButton a {
     height: 70px;
     font-size: 24px;
     font-weight: 600;
     border-radius: 12px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
 }
 </style>
 

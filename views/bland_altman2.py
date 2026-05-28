@@ -18,6 +18,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 st.info("Laden Sie eine CSV-Datei mit Ihren Messwerten hoch. Die Analyse wird automatisch durchgeführt.")
 
+
 st.markdown("<br>", unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader(
@@ -25,6 +26,13 @@ uploaded_file = st.file_uploader(
     type="csv",
     key="bland_altman_upload"
 )
+# Button zur Benutzeranleitung
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    if st.button("📚 Zur Benutzeranleitung", use_container_width=True):
+        st.switch_page("views/Benutzeranleitung_1.py")
+
+
 if uploaded_file is not None:
     try:
         df = pd.read_csv(uploaded_file, sep=None, engine='python')
