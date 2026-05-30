@@ -4,5 +4,5 @@ Wir erstellen eine einfache App, inder wir ein CSV mit Testdaten raufladen könn
 # Studis:
 - Dennis Bailer (Baileden@students.zhaw.ch)
 - David Brunner (brunndav@students.zhaw.ch)
-- Frochaux Noémie (frochnoe@students.zhaw.ch)
-- Vagias Dimitrios (vagiadim@students.zhaw.ch)
+- Noémie Frochaux (frochnoe@students.zhaw.ch)
+- Dimitrios Vagias (vagiadim@students.zhaw.ch)
