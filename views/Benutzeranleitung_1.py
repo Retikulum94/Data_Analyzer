@@ -1107,7 +1107,7 @@ elif page == "Verlauf in SwitchDrive":
     st.markdown("""
     <div class="step-box">
     <h4>Schritt 1: Zur Startseite gehen</h4>
-    <p>Gehe zur Startseite (Homepage) der Anwendung.</p>
+    <p>Gehe zur Startseite (Home).</p>
     </div>
     """, unsafe_allow_html=True)
     
