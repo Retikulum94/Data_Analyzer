@@ -71,7 +71,8 @@ page = st.sidebar.radio("Wähle einen Bereich:", [
     "Datei hochladen",
     "Einstellungen",
     "Ergebnisse interpretieren",
-    "Häufig gestellte Fragen"
+    "Häufig gestellte Fragen",
+    "Verlauf in SwitchDrive"
 ])
 
 
@@ -1090,6 +1091,167 @@ elif page == "Häufig gestellte Fragen":
         <li>Versuche die Schritte in dieser Anleitung zu wiederholen</li>
         <li>Falls weiterhin Probleme: Überprüfe die Fehlermeldung in der App</li>
     </ol>
+    </div>
+    """, unsafe_allow_html=True)
+
+elif page == "Verlauf in SwitchDrive":
+    st.header(" Verlauf in SwitchDrive")
+    
+    st.markdown("""
+    Alle erstellten Grafiken und Ergebnisse werden automatisch in einem SwitchDrive gespeichert, 
+    auf den du und deine Mitarbeiter jederzeit zugreifen können.
+    """)
+    
+    st.subheader(" Wie greifst du auf den SwitchDrive zu?")
+    
+    st.markdown("""
+    <div class="step-box">
+    <h4>Schritt 1: SwitchDrive öffnen</h4>
+    <p>Gehe zu folgendem Link:</p>
+    <p><strong>https://switchdrive.switch.ch</strong></p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="step-box">
+    <h4>Schritt 2: Anmelden</h4>
+    <p>Melde dich mit folgenden Zugangsdaten an:</p>
+    <ul>
+        <li><strong>Benutzername/Email:</strong> Wie im Projekt dokumentiert</li>
+        <li><strong>Passwort:</strong> Passwort</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="step-box">
+    <h4>Schritt 3: Zum Projektordner navigieren</h4>
+    <p>Nach dem Anmelden findest du den Ordner mit allen Grafiken und Ergebnissen. 
+    Hier werden automatisch alle Analysen gespeichert, die mit dem Analyzer erstellt wurden.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="step-box">
+    <h4>Schritt 4: Grafiken herunterladen</h4>
+    <p>Du kannst alle Grafiken direkt im SwitchDrive ansehen oder herunterladen:</p>
+    <ul>
+        <li>Rechtsklick auf die Datei</li>
+        <li>"Herunterladen" wählen</li>
+        <li>Datei wird auf deinen Computer gespeichert</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.subheader(" Wichtig: Sicherheit und Datenschutz")
+    
+    st.markdown("""
+    <div class="warning-box">
+    <h4> WARNUNG: Dies ist ein ÖFFENTLICHER SwitchDrive!</h4>
+    <p><strong>Bitte beachte:</strong></p>
+    <ul>
+        <li><strong>Öffentlicher Zugriff:</strong> Der SwitchDrive ist öffentlich zugänglich</li>
+        <li><strong>Sichtbar für alle Nutzer:</strong> JEDER Benutzer, der sich anmeldet, kann alle hochgeladenen Grafiken und Ergebnisse von ALLEN Nutzern sehen</li>
+        <li><strong>Keine Datenschutzbegrenzung:</strong> Es gibt keine Einschränkung auf deine persönlichen Analysen</li>
+        <li><strong>Permanente Speicherung:</strong> Alle Grafiken bleiben dauerhaft gespeichert</li>
+        <li><strong>Keine Löschung ohne Absprache:</strong> Gelöschte Dateien können möglicherweise wiederhergestellt werden</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.subheader(" Was sollte ich beachten?")
+    
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        st.markdown("""
+        ####  Datenschutz
+        - Keine vertraulichen Patientendaten in Grafiken
+        - Keine sensiblen Messergebnisse mit Identifikation
+        - Grafiken sollten anonymisiert sein
+        - Überprüfe deine Daten vor dem Upload
+        """)
+    
+    with col2:
+        st.markdown("""
+        ####  Gute Praktiken
+        - Vergib aussagekräftige Dateinamen
+        - Organisiere Grafiken in Unterordnern
+        - Dokumentiere was analysiert wurde
+        - Teile Links nur mit Berechtigten
+        """)
+    
+    st.subheader(" Beispiel: Sichtbarkeit")
+    
+    st.markdown("""
+    <div class="example-box">
+    <strong>Szenario:</strong> Du führst eine Analyse durch
+    
+    <strong>Was passiert:</strong>
+    1. Du führst die Analyse mit dem Analyzer durch
+    2. Die Grafik wird automatisch in den SwitchDrive hochgeladen
+    3. Anna meldet sich im SwitchDrive an - sie sieht deine Grafik
+    4. Bob meldet sich im SwitchDrive an - er sieht deine Grafik auch
+    5. Caroline meldet sich im SwitchDrive an - sie sieht ALLE Grafiken (deine, Annas und Bobs)
+    
+    <strong>Fazit:</strong> ALLE Nutzer sehen ALLE Grafiken!
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.subheader(" Häufige Fragen")
+    
+    with st.expander(" Kann ich einzelne Grafiken für andere Nutzer verstecken?"):
+        st.markdown("""
+        Nein, das ist nicht möglich. Der SwitchDrive ist öffentlich für alle angemeldeten Nutzer.
+        
+        Wenn du vertrauliche Daten hast:
+        - Speichere die Ergebnisse lokal auf deinem Computer
+        - Verwende einen Dateinamen, der keine sensiblen Informationen enthält
+        - Anonymisiere deine Eingabedaten
+        """)
+    
+    with st.expander(" Kann der SwitchDrive-Link mit anderen geteilt werden?"):
+        st.markdown("""
+        Der Link zum SwitchDrive kann geteilt werden, aber:
+        
+        - Jeder mit Anmeldedaten hat Zugriff auf ALLE Dateien
+        - Es gibt keine individuellen Berechtigungen
+        - Teile den Link nur mit vertrauenswürdigen Personen
+        - Teile niemals Passwörter über unsichere Kanäle
+        """)
+    
+    with st.expander(" Wie lange werden die Daten gespeichert?"):
+        st.markdown("""
+        Die Dateien werden unbegrenzt gespeichert bis zu:
+        - Manuelle Löschung durch einen Administrator
+        - Speicherlimit ist überschritten (aktuell großzügig bemessen)
+        - Projekt wird beendet
+        
+        Rechne damit, dass deine Grafiken dauerhaft vorhanden sein werden.
+        """)
+    
+    with st.expander(" Wie oft werden Grafiken synchronisiert?"):
+        st.markdown("""
+        Die Synchronisation geschieht automatisch:
+        - Neue Grafiken: Innerhalb weniger Minuten sichtbar
+        - Gelöschte Grafiken: Können noch kurzzeitig sichtbar sein
+        - Geänderte Grafiken: Aktualisierung innerhalb weniger Minuten
+        
+        Für Echtzeitfreigabe: Informiere andere Nutzer manuell.
+        """)
+    
+    st.markdown("---")
+    
+    st.markdown("""
+    <div class="guide-section">
+    <h3> Zusammenfassung</h3>
+    <ul>
+        <li><strong>Link:</strong> https://switchdrive.switch.ch</li>
+        <li><strong>Passwort:</strong> Passwort</li>
+        <li><strong>Wichtig:</strong> Dies ist ein öffentlicher Bereich - alle Nutzer sehen alle Grafiken!</li>
+        <li><strong>Sicherheit:</strong> Verwende nur anonymisierte Daten</li>
+        <li><strong>Backup:</strong> Speichere wichtige Ergebnisse auch lokal</li>
+    </ul>
     </div>
     """, unsafe_allow_html=True)
 
