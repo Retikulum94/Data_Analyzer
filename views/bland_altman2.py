@@ -71,7 +71,7 @@ if uploaded_file is not None:
 
                     col1, col2 = st.columns([1, 1])
                     with col1:
-                        if st.button("💾 Zu switchdrive hochladen"):
+                        if st.button("💾 Öffentlich zu switchdrive hochladen"):
                             dm = DataManager(fs_protocol='webdav', fs_root_folder='Data_Analyzer')
                             timestamp = pd.Timestamp.now().strftime("%Y%m%d_%H%M%S")
                             filename = f"bland_altman_{timestamp}.png"
