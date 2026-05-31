@@ -113,8 +113,16 @@ if uploaded_file is not None:
                         st.metric("Übereinstimmungsbereich", f"{agreement_range:.4f}")
                     
                     bias_pct = calculate_bias_percentage(x, y)
-                    st.metric("Bias (%)", f"{bias_pct:.2f}%")
-                    
+
+                    abs_bias = abs(bias_pct)
+
+                    if abs_bias <= 5:
+                        st.success(f"Bias: {bias_pct:.2f}% – Sehr gut")
+                    elif abs_bias <= 10:
+                        st.warning(f"Bias: {bias_pct:.2f}% – Akzeptabel")
+                    else:
+                        st.error(f"Bias: {bias_pct:.2f}% – Schlecht")
+
                     st.subheader("💡 Interpretation")
                     st.info(f"""
                     **Mittlere Differenz:** {analysis['mean_diff']:.4f}  
