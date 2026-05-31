@@ -1099,45 +1099,45 @@ elif page == "Verlauf in SwitchDrive":
     
     st.markdown("""
     Alle erstellten Grafiken und Ergebnisse werden automatisch in einem SwitchDrive gespeichert, 
-    auf den du und deine Mitarbeiter jederzeit zugreifen können.
+    auf den du jederzeit zugreifen kannst.
     """)
     
-    st.subheader(" Wie greifst du auf den SwitchDrive zu?")
+    st.subheader(" Wie greifst du auf den Verlauf zu?")
     
     st.markdown("""
     <div class="step-box">
-    <h4>Schritt 1: SwitchDrive öffnen</h4>
-    <p>Gehe zu folgendem Link:</p>
-    <p><strong>https://switchdrive.switch.ch</strong></p>
+    <h4>Schritt 1: Zur Startseite gehen</h4>
+    <p>Gehe zur Startseite (Homepage) der Anwendung.</p>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("""
     <div class="step-box">
-    <h4>Schritt 2: Anmelden</h4>
-    <p>Melde dich mit folgenden Zugangsdaten an:</p>
+    <h4>Schritt 2: Auf den "Verlauf" Button klicken</h4>
+    <p>Du siehst auf der Startseite einen Button mit der Aufschrift <strong>"Verlauf"</strong>. 
+    Klicke auf diesen Button, um zum SwitchDrive zu gelangen.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="step-box">
+    <h4>Schritt 3: Passwort eingeben</h4>
+    <p>Es wird dich auffordern, das Passwort einzugeben.</p>
     <ul>
-        <li><strong>Benutzername/Email:</strong> Wie im Projekt dokumentiert</li>
         <li><strong>Passwort:</strong> Passwort</li>
     </ul>
+    <p><em>Du benötigst kein Konto oder Login - nur das Passwort!</em></p>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("""
     <div class="step-box">
-    <h4>Schritt 3: Zum Projektordner navigieren</h4>
-    <p>Nach dem Anmelden findest du den Ordner mit allen Grafiken und Ergebnissen. 
-    Hier werden automatisch alle Analysen gespeichert, die mit dem Analyzer erstellt wurden.</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("""
-    <div class="step-box">
-    <h4>Schritt 4: Grafiken herunterladen</h4>
-    <p>Du kannst alle Grafiken direkt im SwitchDrive ansehen oder herunterladen:</p>
+    <h4>Schritt 4: Grafiken ansehen und herunterladen</h4>
+    <p>Nach der Passwort-Eingabe siehst du alle gespeicherten Grafiken und Ergebnisse. 
+    Du kannst diese direkt ansehen oder herunterladen:</p>
     <ul>
-        <li>Rechtsklick auf die Datei</li>
-        <li>"Herunterladen" wählen</li>
+        <li>Klicke auf eine Grafik, um sie anzusehen</li>
+        <li>Nutze den Download-Button oder Rechtsklick um zu speichern</li>
         <li>Datei wird auf deinen Computer gespeichert</li>
     </ul>
     </div>
@@ -1246,8 +1246,9 @@ elif page == "Verlauf in SwitchDrive":
     <div class="guide-section">
     <h3> Zusammenfassung</h3>
     <ul>
-        <li><strong>Link:</strong> https://switchdrive.switch.ch</li>
+        <li><strong>Button:</strong> Drücke "Verlauf" auf der Startseite</li>
         <li><strong>Passwort:</strong> Passwort</li>
+        <li><strong>Kein Konto nötig:</strong> Einfach Passwort eingeben und schon hast du Zugriff</li>
         <li><strong>Wichtig:</strong> Dies ist ein öffentlicher Bereich - alle Nutzer sehen alle Grafiken!</li>
         <li><strong>Sicherheit:</strong> Verwende nur anonymisierte Daten</li>
         <li><strong>Backup:</strong> Speichere wichtige Ergebnisse auch lokal</li>
