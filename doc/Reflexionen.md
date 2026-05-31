@@ -3,4 +3,8 @@
 Es war toll mal zu sehen, wie einfach es heutzutage ist, ein kleines App zu programmieren. Ehrlich gesagt ist sowieso vieles durch AI und "vibe-coding" erstellt. Aber als technisch versierter Typ mit einem Flair für diese Arbeit, lief für mich dieses Projekt relativ ring. Ich habe nun Lust, mit meinem Raspberry-Pi zu Hause das ein- oder andere Projekt anzugehen, welche ich schon lange im Hinterkopf habe. 
 Ob ich nun diese App tatsächlich für meinen Projekt- und Bachelorarbeiten benutzen werde, sehen wir dann noch. Mir war es aber wichtig, dass wir eine App programmieren, die tatsächlich für medizinische Labors nützlich sein kann. 
 # Noémie Frochaux
-# Dimitrios Vagias  
+Es war sehr interessant, den Entstehungsprozess einer App aus einer anderen Perspektive kennenzulernen. Da ich hauptsächlich für das Design der App verantwortlich war, konnte ich meine kreativen Fähigkeiten einbringen und lernen, wie wichtig eine benutzerfreundliche und ansprechende Gestaltung für den Erfolg einer Anwendung ist.
+Besonders spannend fand ich es, Ideen visuell umzusetzen und zu sehen, wie das Design mit der technischen Entwicklung zusammengeführt wird. Insgesamt war das Projekt eine lehrreiche Erfahrung, die mir gezeigt hat, wie bedeutend gutes Design für die Benutzererfahrung einer App ist.
+# Dimitrios Vagias
+Es war sehr spannend zu sehen, wie eine App von der ersten Idee über die Planung bis hin zur Entwicklung entsteht. Da ich zuvor weder Programmiererfahrung hatte noch die verwendeten Methoden kannte, konnte ich während des Projekts viele neue Kenntnisse erwerben. Besonders interessant fand ich es, den gesamten Entwicklungsprozess mitzuerleben und zu verstehen, wie aus einem Konzept eine funktionierende Anwendung wird.
+Das Projekt hat mir gezeigt, wie vielseitig und spannend die App-Entwicklung sein kann. Insgesamt war es eine sehr lehrreiche Erfahrung, die mein Interesse an diesem Bereich geweckt hat.
