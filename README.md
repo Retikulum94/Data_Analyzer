@@ -6,3 +6,5 @@ Wir erstellen eine einfache App, inder wir ein CSV mit Testdaten raufladen könn
 - David Brunner (brunndav@students.zhaw.ch)
 - Noémie Frochaux (frochnoe@students.zhaw.ch)
 - Dimitrios Vagias (vagiadim@students.zhaw.ch)
+
+Link zur App: https://passingbablok.streamlit.app/
